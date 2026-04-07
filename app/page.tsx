@@ -1,26 +1,33 @@
 import Header from '@/components/Home/layout/Header';
-import Hero from '@/components/Home/sections/Hero';
-import Features from '@/components/Home/sections/Features';
-import About from '@/components/Home/sections/About';
-import How from '@/components/Home/sections/How';
-import Companies  from '@/components/Home/sections/Companies';
-import Testimonials from '@/components/Home/sections/Testimonial';
+import Hero from '@/components/Home/layout/Hero';
+import Entities from '@/components/Home/layout/Entities';
+import ImpactStats from '@/components/Home/layout/ImpactStats';
+import Team from '@/components/Home/layout/Team';
+import  RecentProjects from '@/components/Home/layout/RecentProjects';
 import Footer from '@/components/Home/layout/Footer';
 
 export default function HomePage() {
   return (
-    <>
-      {/* Header fixe */}
+    <div className="relative min-h-screen">
+      {/* Le Header est en absolute/fixed dans son propre composant, 
+          il viendra naturellement se placer au-dessus du Hero 
+      */}
       <Header />
 
-      {/* Toutes les sections dans l’ordre parfait */}
-      <Hero />
-      <Features />
-      <How />
-      <About />
-      <Companies />
-      <Testimonials />
-      <Footer />
-    </>
+      <main>
+        {/* On retire le overflow-hidden global s'il n'est pas nécessaire, 
+            mais on garde une structure de section propre */}
+        <Hero />
+        
+        {/* Section des 4 entités (ONG, Coopérative, SARLs) */}
+        <Entities />
+        <ImpactStats />
+        <Team />
+        <RecentProjects />
+        <Footer />
+        
+        {/* Tu pourras ajouter tes prochaines sections ici (Contact, Footer...) */}
+      </main>
+    </div>
   );
 }
