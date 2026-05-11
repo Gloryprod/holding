@@ -1,81 +1,68 @@
 import { Heart, Sprout, Building2, Briefcase, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import * as Icons from "lucide-react";
 
-const entities = [
-  {
-    title: "L'ONG",
-    description: "Action sociale et humanitaire pour le développement des communautés locales.",
-    icon: <Heart className="w-6 h-6" />,
-    link: "/ong",
-    color: "bg-brand/10",
-  },
-  {
-    title: "La Coopérative",
-    description: "Mutualisation des ressources et soutien aux producteurs pour une économie solidaire.",
-    icon: <Sprout className="w-6 h-6" />,
-    link: "/cooperative",
-    color: "bg-brand/10",
-  },
-  {
-    title: "SARL 1",
-    description: "Expertise technique et solutions innovantes pour les défis industriels de demain.",
-    icon: <Building2 className="w-6 h-6" />,
-    link: "/sarl1",
-    color: "bg-background border border-border",
-  },
-  {
-    title: "SARL 2",
-    description: "Services commerciaux et logistiques haute performance à l'échelle internationale.",
-    icon: <Briefcase className="w-6 h-6" />,
-    link: "/sarl2",
-    color: "bg-background border border-border",
-  },
-];
+interface Entreprise {
+  nom: string;
+  tagline: string;
+  description: string;
+  iconName: string;
+  slug: { current: string };
+  image: string; // On suppose que l'image est gérée à part ou via un champ supplémentaire
+  mission: string;
+  adresse: string;
+  telephone: string;
+  email: string;
+  services: {
+    titre: string;
+    description: string;
+  }[]
 
-export default function Entities() {
+}
+
+export default function Entities({ data }: { data: Entreprise }) {
   return (
-    <section id="features" className="py-12 bg-background">
+    <section id="features" className="py-16 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* En-tête de section */}
-        <div className="mb-16 flex flex-col items-center text-center">
-          <h2 className="text-sm font-bold text-brand uppercase tracking-widest mb-3">
-            Notre Écosystème
-          </h2>
-          <p className="text-3xl md:text-4xl font-heading font-bold text-foreground max-w-2xl">
-            Quatre entités, une seule vision : la synergie au service de l&apos;impact.
-          </p>
-        </div>
-
         {/* Grille des entités */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {entities.map((entity, index) => (
-            <div 
-              key={index}
-              className={`group relative p-8 rounded-3xl transition-all duration-300 hover:-translate-y-2 ${entity.color}`}
-            >
-              {/* Icône / Logo temporaire */}
-              <div className="mb-6 w-12 h-12 rounded-2xl bg-brand text-brand-foreground flex items-center justify-center shadow-lg shadow-brand/20">
-                {entity.icon}
+        <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-8">
+          <div className="mb-12 h-auto flex flex-col col-span-3">
+            <h1 className="text-2xl font-heading font-bold flex items-center gap-3">
+              <Icons.EarthLockIcon className="text-brand" /> A propos de nous !
+            </h1>
+            <p className="m-4">
+              {data.description}
+            </p>
+
+            <h2 className="text-xl font-bold text-brand ml-4 mb-3">Mission & Vision</h2>
+            <p className="ml-4 mb-2">{data.mission}</p>
+          </div>
+
+          <div className="relative col-span-2 hover:scale-105 transition-transform duration-300 rounded-lg overflow-hidden">
+              <div className="flex items-center gap-4 mb-6">
+                <Image
+                  src={data.image} 
+                  alt={data.nom}
+                  width={500}
+                  height={600}
+                  className="w-80 h-100 object-cover rounded-lg"
+                />
               </div>
-
-              {/* Contenu */}
-              <h3 className="text-xl font-heading font-bold mb-3 text-foreground">
-                {entity.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-8">
-                {entity.description}
-              </p>
-
-              {/* Bouton d'action */}
-              <a 
-                href={entity.link}
-                className="inline-flex items-center gap-2 text-sm font-bold text-brand group-hover:underline"
-              >
-                Visiter l&apos;espace
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </a>
-            </div>
-          ))}
+              {/* <div className="absolute -inset-4 opacity-10 rounded-[2.5rem] blur-2xl group-hover:opacity-20 transition-opacity"></div> */}
+              <div className="absolute bottom-0 right-6 z-40 m-4 rotate-y-15 rotate-z-15">
+                <div className="hover:scale-110 transition-transform duration-300">
+                  <Image
+                    src="/hero5.jpg" 
+                    alt={data.nom}
+                    width={200}
+                    height={350}
+                    className="w-50 h-60 object-cover rounded-lg "
+                  />
+                </div>
+              </div>
+            
+          </div>
         </div>
       </div>
     </section>

@@ -2,25 +2,21 @@
 
 import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
-import { useEffect, useState } from "react"
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    const timeout = window.setTimeout(() => setMounted(true), 0)
-    return () => window.clearTimeout(timeout)
-  }, [])
-  
-  if (!mounted) return null
+  const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      className="cursor-pointer p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      aria-label="Changer de thème"
     >
-      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+      {resolvedTheme === "dark" ? (
+        <Sun size={20} className="text-yellow-200 hover:text-black" />
+      ) : (
+        <Moon size={20} className="text-slate-700" />
+      )}
     </button>
   )
 }

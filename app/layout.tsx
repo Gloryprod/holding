@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { Geist, Inter, Geist_Mono } from 'next/font/google'
+import { Geist, Playfair_Display, Geist_Mono, Inter } from 'next/font/google'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -37,7 +37,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >

@@ -1,6 +1,25 @@
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
-export default function Footer() {
+interface Entreprise {
+  nom: string;
+  tagline: string;
+  description: string;
+  iconName: string;
+  slug: { current: string };
+  image: string; // On suppose que l'image est gérée à part ou via un champ supplémentaire
+  mission: string;
+  adresse: string;
+  telephone: string;
+  email: string;
+  services: {
+    titre: string;
+    description: string;
+  }[]
+
+}
+
+export default function Footer({ data }: { data: Entreprise }) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -24,16 +43,15 @@ export default function Footer() {
         <hr className="border-border mb-20" />
 
         {/* 2. Grille Principale du Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           
           {/* Colonne 1 : À propos */}
           <div className="space-y-6">
             <h3 className="text-2xl font-heading font-bold text-foreground">
-              Obed <span className="text-brand">Group</span>
+              <span className="text-brand">{data.nom}</span>
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Une holding multi-sectorielle dédiée au développement durable, 
-              alliant impact social et performance économique à travers nos filiales.
+              {data.tagline || "Votre partenaire de confiance pour un avenir meilleur."}
             </p>
             <div className="flex gap-4">
               <a href="#" className="p-2 rounded-full border border-border hover:bg-brand hover:text-white transition-colors">
@@ -52,21 +70,9 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-6">Navigation</h4>
             <ul className="space-y-4 text-sm text-muted-foreground">
-              <li><a href="#hero" className="hover:text-brand transition-colors">Accueil</a></li>
-              <li><a href="#features" className="hover:text-brand transition-colors">Nos Entités</a></li>
-              <li><a href="#team" className="hover:text-brand transition-colors">Gouvernance</a></li>
-              <li><a href="#news" className="hover:text-brand transition-colors">Actualités</a></li>
-            </ul>
-          </div>
-
-          {/* Colonne 3 : Les Espaces Dédiés */}
-          <div>
-            <h4 className="font-bold mb-6">Nos Espaces</h4>
-            <ul className="space-y-4 text-sm text-muted-foreground">
-              <li><a href="/ong" className="flex items-center gap-2 hover:text-brand transition-colors">Espace ONG <ArrowUpRight size={14}/></a></li>
-              <li><a href="/cooperative" className="flex items-center gap-2 hover:text-brand transition-colors">La Coopérative <ArrowUpRight size={14}/></a></li>
-              <li><a href="/sarl1" className="flex items-center gap-2 hover:text-brand transition-colors">SARL Industrie <ArrowUpRight size={14}/></a></li>
-              <li><a href="/sarl2" className="flex items-center gap-2 hover:text-brand transition-colors">SARL Services <ArrowUpRight size={14}/></a></li>
+              <li><Link href="/" className="hover:text-brand transition-colors">Accueil</Link></li>
+              <li><Link href="/about" className="hover:text-brand transition-colors">Nos projets</Link></li>
+              <li><Link href="/contact" className="hover:text-brand transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -76,15 +82,15 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-brand shrink-0" />
-                <span>Siège Social, Rue de la Synergie, <br /> Ville, Pays</span>
+                <span>Siège Social {data.adresse}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="text-brand shrink-0" />
-                <span>+XXX XX XX XX XX</span>
+                <span>{data.telephone || "+33 1 23 45 67 89"}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-brand shrink-0" />
-                <span>contact@obedgroup.com</span>
+                <span>{data.email || "contact@obedgroup.com"}</span>
               </li>
             </ul>
           </div>
@@ -93,14 +99,14 @@ export default function Footer() {
 
         {/* 3. Copyright et Légal */}
         <div className="border-t border-border pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-muted-foreground font-medium uppercase tracking-widest">
-          <p>© {currentYear} Obed Group. Tous droits réservés.</p>
+          <p>© {currentYear} {data.nom}. Tous droits réservés.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-brand">Mentions Légales</a>
-            <a href="#" className="hover:text-brand">Politique de Confidentialité</a>
+            <Link href="#" className="hover:text-brand">Mentions Légales</Link>
+            <Link href="#" className="hover:text-brand">Politique de Confidentialité</Link>
           </div>
         </div>
 
       </div>
-    </footer>
+    </footer> 
   );
 }

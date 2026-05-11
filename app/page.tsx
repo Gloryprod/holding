@@ -8,25 +8,18 @@ import Footer from '@/components/Home/layout/Footer';
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen">
-      {/* Le Header est en absolute/fixed dans son propre composant, 
-          il viendra naturellement se placer au-dessus du Hero 
-      */}
+    <div className="relative min-h-screen overflow-hidden no-scrollbar ">
       <Header />
 
-      <main>
-        {/* On retire le overflow-hidden global s'il n'est pas nécessaire, 
-            mais on garde une structure de section propre */}
+      <main className="">
         <Hero />
         
-        {/* Section des 4 entités (ONG, Coopérative, SARLs) */}
         <Entities />
         <ImpactStats />
         <Team />
         <RecentProjects />
         <Footer />
         
-        {/* Tu pourras ajouter tes prochaines sections ici (Contact, Footer...) */}
       </main>
     </div>
   );
