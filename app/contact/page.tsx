@@ -23,7 +23,7 @@ export default function ContactForm() {
 
   return (
     <>
-    <Header />
+    {/* <Header /> */}
     <section id="contact" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -148,7 +148,7 @@ export default function ContactForm() {
         </div>
       </div>
     </section>
-    <Footer />
+    {/* <Footer /> */}
     </>
   );
 }

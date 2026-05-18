@@ -8,7 +8,7 @@ export const membreType = defineType({
   icon: UsersIcon,
   fields: [
     defineField({
-      name: 'nom',
+      name: 'name',
       title: 'Nom & Prénom',
       type: 'string',
       validation: (Rule) => Rule.required(),
@@ -18,15 +18,16 @@ export const membreType = defineType({
       title: 'Rôle Principal',
       type: 'string',
       description: 'Ex: Directeur Technique, Responsable Opérations...',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'image',
       title: 'Photo de profil',
       type: 'image',
-      options: { hotspot: true }, // Permet de recadrer la photo directement dans Sanity
+      options: { hotspot: true },
     }),
     defineField({
-      name: 'bio',
+      name: 'description',
       title: 'Biographie courte',
       type: 'text',
       rows: 3,
@@ -34,6 +35,11 @@ export const membreType = defineType({
     defineField({
       name: 'linkedin',
       title: 'Lien LinkedIn',
+      type: 'url',
+    }),
+    defineField({
+      name: 'mail',
+      title: 'Adresse Email',
       type: 'url',
     }),
   ],

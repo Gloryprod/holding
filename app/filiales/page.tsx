@@ -168,7 +168,7 @@ export default async function FilialesPage() {
         </div>
       </section>
     </main>
-    <Footer />
+    {/* <Footer /> */}
     </>
   );
 }

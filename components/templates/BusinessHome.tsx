@@ -11,8 +11,7 @@ export default async function BusinessHomePage({ data }: { data: any }) {
         <div className="relative min-h-screen overflow-hidden no-scrollbar ">
 
         <main className="">
-            <Hero data={data} />
-            
+            <Hero data={data} />           
             <Entities data={data} />
             <Services data={data} />
             <ImpactStats />

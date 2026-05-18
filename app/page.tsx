@@ -9,16 +9,16 @@ import Footer from '@/components/Home/layout/Footer';
 export default function HomePage() {
   return (
     <div className="relative min-h-screen overflow-hidden no-scrollbar ">
-      <Header />
+      {/* <Header /> */}
 
       <main className="">
-        <Hero />
+        {/* <Hero /> */}
         
-        <Entities />
+        {/* <Entities /> */}
         <ImpactStats />
         <Team />
         <RecentProjects />
-        <Footer />
+        {/* <Footer /> */}
         
       </main>
     </div>

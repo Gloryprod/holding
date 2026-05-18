@@ -7,7 +7,7 @@ import { AboutHero } from "@/components/About/AboutHero";
 export default function AboutPage() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main >
         <section className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-6">
@@ -58,10 +58,10 @@ export default function AboutPage() {
                 </div>
             </div>
         </section>
-        <Journey />
+        {/* <Journey /> */}
         <Values />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -85,7 +85,7 @@ import { useState } from "react";
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="lg:hidden">
-                <button className="p-2 rounded-lg hover:bg-muted transition-colors outline-none">
+                <button className="cursor-pointer p-2 rounded-lg hover:bg-muted transition-colors outline-none">
                 <Menu className="w-7 h-7 text-foreground" />
                 </button>
             </SheetTrigger>
@@ -123,7 +123,7 @@ import { useState } from "react";
                    
                         <Link href="/contact" className="w-full block">
                             <Button 
-                            className="w-full bg-brand text-brand-foreground py-6 rounded-2xl text-base font-bold shadow-lg shadow-brand/20 hover:opacity-90 transition-all"
+                            className="cursor-pointer w-full bg-brand text-brand-foreground py-6 rounded-2xl text-base font-bold shadow-lg shadow-brand/20 hover:opacity-90 transition-all"
                             onClick={() => setOpen(false)}
                             >
                             Nous rejoindre

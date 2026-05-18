@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { rootDomain } from '@/lib/utils';
+import { rootDomain, protocol } from '@/lib/utils';
 
 export const config = {
   matcher: [
@@ -56,15 +56,25 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const subdomain = extractSubdomain(request);
 
-    if (subdomain) {
-        // Block access to admin page from subdomains
-        if (pathname.startsWith('/admin')) {
-            return NextResponse.redirect(new URL('/', request.url));
-        }
+  if (subdomain) {
+      // Block access to admin page from subdomains
+      if (pathname.startsWith('/admin')) {
+          return NextResponse.redirect(new URL('/', request.url));
+      }
+      return NextResponse.rewrite(new URL(`/s/${subdomain}${pathname}`, request.url));    
+  }
 
-        
-        return NextResponse.rewrite(new URL(`/s/${subdomain}${pathname}`, request.url));    
-    }
+  if (pathname === '/' && !subdomain) {
+    const protocol = request.nextUrl.protocol;
+    const host = request.headers.get('host') || '';
+    
+    // On construit l'URL de la filiale cible (ex: eden.localhost:3000 ou eden.obedgroup.com)
+    const targetUrl = `${protocol}//ong-eden-benin.${host}`;
+
+    console.log(`Redirecting to: ${targetUrl}`);
+    
+    return NextResponse.redirect(new URL(targetUrl));
+  }
 
   // On the root domain, allow normal access
   return NextResponse.next();

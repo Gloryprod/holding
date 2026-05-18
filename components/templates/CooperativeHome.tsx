@@ -46,7 +46,7 @@ export default function CooperativeHome({ data }: { data: any }) {
 
         {/* 3. NOS PRODUITS PHARE : Section Contrastée */}
         <section className="py-20 bg-muted/30 border-y border-border overflow-hidden">
-          <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col lg:flex-row items-center gap-16">
               <div className="lg:w-1/2">
                 <h2 className="text-3xl md:text-5xl font-black mb-8 leading-tight font-geist">
@@ -57,18 +57,16 @@ export default function CooperativeHome({ data }: { data: any }) {
                   De la récolte à la transformation, nous veillons à ce que chaque produit porte l&apos;empreinte 
                   de notre savoir-faire traditionnel et de nos standards modernes.
                 </p>
-                <button className="cursor-pointer bg-brand text-brand-foreground font-black px-8 py-4 rounded-xl hover:opacity-90 transition-all font-geist uppercase tracking-tight shadow-lg shadow-brand/20">
+                {/* <button className="cursor-pointer bg-brand text-brand-foreground font-black px-8 py-4 rounded-xl hover:opacity-90 transition-all font-geist uppercase tracking-tight shadow-lg shadow-brand/20">
                   Découvrir nos produits
-                </button>
+                </button> */}
               </div>
               
               <div className="lg:w-1/2 grid grid-cols-2 gap-4 relative">
                 <div className="space-y-4">
                   <Image src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=400" alt="Récolte" width={300} height={400} className="rounded-2xl object-cover h-64 w-full shadow-md" />
-                  {/* <Image src="https://images.unsplash.com/photo-1595842696678-5f87aa1f781b?q=80&w=400" alt="Transformation" width={300} height={300} className="rounded-2xl object-cover h-48 w-full shadow-md" /> */}
                 </div>
                 <div className="space-y-4 pt-12">
-                  {/* <Image src="https://images.unsplash.com/photo-1621460245190-349f85493b8e?q=80&w=400" alt="Produit Local" width={300} height={300} className="rounded-2xl object-cover h-48 w-full shadow-md" /> */}
                   <Image src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=400" alt="Agriculture" width={300} height={400} className="rounded-2xl object-cover h-64 w-full shadow-md" />
                 </div>
                 {/* Déco arrière-plan */}
@@ -85,7 +83,7 @@ export default function CooperativeHome({ data }: { data: any }) {
 
         {/* 5. APPEL À REJOINDRE : Utilisation de la carte "Accent" */}
         <section className="py-24">
-          <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="bg-accent/50 rounded-[3rem] p-12 md:p-20 text-center border-2 border-dashed border-brand/30 relative overflow-hidden">
               {/* Effet visuel de fond */}
               <div className="absolute top-0 left-0 w-full h-full bg-grid-slate-100/[0.05] mask-[linear-gradient(0deg,transparent,black)] pointer-events-none"></div>

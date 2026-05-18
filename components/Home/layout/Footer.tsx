@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { FacebookIcon, LinkedinIcon } from "./Team";
 
 interface Entreprise {
   nom: string;
@@ -12,6 +13,8 @@ interface Entreprise {
   adresse: string;
   telephone: string;
   email: string;
+  linkedin: string;
+  facebook: string;
   services: {
     titre: string;
     description: string;
@@ -54,14 +57,14 @@ export default function Footer({ data }: { data: Entreprise }) {
               {data.tagline || "Votre partenaire de confiance pour un avenir meilleur."}
             </p>
             <div className="flex gap-4">
-              <a href="#" className="p-2 rounded-full border border-border hover:bg-brand hover:text-white transition-colors">
+              <a href={data.email} className="cursor-pointer p-2 rounded-full border border-border hover:bg-brand hover:text-white transition-colors">
                 <Mail size={18} />
               </a>
-              <a href="#" className="p-2 rounded-full border border-border hover:bg-brand hover:text-white transition-colors">
-                <Mail size={18} />
+              <a href={data.linkedin} className="cursor-pointer p-2 rounded-full border border-border hover:bg-brand hover:text-white transition-colors">
+                <LinkedinIcon size={18} />
               </a>
-              <a href="#" className="p-2 rounded-full border border-border hover:bg-brand hover:text-white transition-colors">
-                <Mail size={18} />
+              <a href={data.facebook} className="cursor-pointer p-2 rounded-full border border-border hover:bg-brand hover:text-white transition-colors">
+                <FacebookIcon size={18} />
               </a>
             </div>
           </div>

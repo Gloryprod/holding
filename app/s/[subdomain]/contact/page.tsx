@@ -23,7 +23,7 @@ export default async function ContactPage({params}: {params: Promise<{ subdomain
                 Prêt à rejoindre <span className="text-brand">l&apos;écosystème ?</span>
               </h3>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Que vous soyez une institution publique, une entreprise ou un investisseur privé, nous sommes à votre écoute pour discuter de synergies durables.
+                Que vous soyez une institution publique, une entreprise, un particulier ou un investisseur privé, nous sommes à votre écoute pour discuter de synergies durables.
               </p>
             </div>
 
@@ -47,7 +47,7 @@ export default async function ContactPage({params}: {params: Promise<{ subdomain
           </div>
 
           {/* Colonne Droite : Le Formulaire */}
-          <ContactForm />
+          <ContactForm data={data} />
         </div>
       </div>
     </section>

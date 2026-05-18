@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Geist, Playfair_Display, Geist_Mono, Inter } from 'next/font/google'
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -39,7 +40,14 @@ export default function RootLayout({
           attribute="class"
           enableSystem
           disableTransitionOnChange
-        >
+        > 
+          <Toaster
+                position="top-right"
+                toastOptions={{
+                duration: 6000,
+                style: { borderRadius: '10px' },
+                }}
+            />
           {children}
         </ThemeProvider>
       </body>

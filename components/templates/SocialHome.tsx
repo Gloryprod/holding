@@ -15,7 +15,7 @@ export default function SocialHome({ data }: { data: any }) {
 
         {/* 2. NOTRE MISSION */}
         <section className="py-20">
-          <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col lg:flex-row items-center gap-16">
               <div className="lg:w-1/2">
                 {/* Utilisation de la couleur brand avec opacité pour le badge */}
@@ -75,7 +75,7 @@ export default function SocialHome({ data }: { data: any }) {
 
         {/* 4. NOS AXES D'INTERVENTION */}
         <section className="py-24 bg-muted/20">
-          <div className="container mx-auto px-4 text-center">
+          <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="text-3xl md:text-4xl font-black mb-16 font-geist text-foreground">Nos Axes d&apos;Intervention</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               {['Éducation', 'Santé', 'Autonomisation'].map((item, index) => (
@@ -100,7 +100,7 @@ export default function SocialHome({ data }: { data: any }) {
         
         {/* 6. CALL TO ACTION (Fidèle à ta couleur Brand définie en OKLCH) */}
         <section className="py-20 mb-20">
-          <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="bg-brand rounded-[3rem] p-12 md:p-20 text-center text-brand-foreground relative overflow-hidden shadow-2xl shadow-brand/20 transition-all duration-500">
               {/* Cercles décoratifs */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>

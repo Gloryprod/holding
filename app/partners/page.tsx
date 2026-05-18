@@ -43,7 +43,7 @@ const resourceDocs = [
 export default function Partnerships() {
   return (
     <>
-    <Header />
+    {/* <Header /> */}
     <div className="bg-background">
       {/* 1. SECTION MESSAGE (L'ACCROCHE) */}
       <section className="py-24 border-border/50">
@@ -142,7 +142,7 @@ export default function Partnerships() {
         </div>
       </section>
     </div>
-    <Footer />
+    {/* <Footer /> */}
     </>
   );
 }

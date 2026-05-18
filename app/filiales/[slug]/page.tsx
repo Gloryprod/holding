@@ -21,7 +21,7 @@ export default async function EntityPage({ params }: { params: Promise<{ slug: s
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="bg-background min-h-screen mt-16">
         
         {/* 1. HERO SECTION PREMIUM */}
@@ -305,7 +305,7 @@ export default async function EntityPage({ params }: { params: Promise<{ slug: s
         </section>
 
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

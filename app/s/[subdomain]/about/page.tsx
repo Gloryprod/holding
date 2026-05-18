@@ -1,8 +1,6 @@
 import { Journey } from "@/components/About/Journey";
-import { Values } from "@/components/About/Values";
 import { getEntityData } from "@/lib/getEntityData";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
 
 export default async function AboutPage({ params }: { params: Promise<{ subdomain: string }> }) {
   const { subdomain } = await params;
@@ -117,10 +115,9 @@ export default async function AboutPage({ params }: { params: Promise<{ subdomai
                 </div>
             </div>
         </section>
-        <div className="px-48">
+        <div className="">
             <Journey data={data} />
         </div>
-        {/* <Values /> */}
       </main>
     </>
   );
