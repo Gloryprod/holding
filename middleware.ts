@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { rootDomain, protocol } from '@/lib/utils';
 
 export const config = {
@@ -13,7 +13,7 @@ export const config = {
 };
 
 
-function extractSubdomain(request: NextRequest): string | null {
+export function extractSubdomain(request: NextRequest): string | null {
   const url = request.url;
   const host = request.headers.get('host') || '';
   const hostname = host.split(':')[0];

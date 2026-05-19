@@ -113,6 +113,32 @@ export const entrepriseType = defineType({
           { title: 'Coopérative', value: 'cooperative' },
         ],
       },
-    })
+    }),
+    defineField({
+      name: 'seo',
+      title: 'Référencement (SEO)',
+      type: 'object',
+      fields: [
+        {
+          name: 'metaTitle',
+          title: 'Titre Meta',
+          type: 'string',
+          description: 'Le titre affiché dans les onglets du navigateur et Google (60-70 caractères).'
+        },
+        {
+          name: 'metaDescription',
+          title: 'Description Meta',
+          type: 'text',
+          rows: 3,
+          description: 'Le résumé affiché dans les résultats Google (150-160 caractères).'
+        },
+        {
+          name: 'ogImage',
+          title: 'Image de partage (Open Graph)',
+          type: 'image',
+          description: 'L\'image qui s\'affiche lors du partage sur WhatsApp, Facebook, LinkedIn.'
+        }
+      ],
+    }),
   ],
 })
