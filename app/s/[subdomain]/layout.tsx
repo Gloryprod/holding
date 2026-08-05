@@ -7,28 +7,31 @@ import { Metadata } from "next";
 import { headers } from "next/headers";
 import {extractSubdomain} from "@/middleware";
 
-// Fonction native de Next.js pour générer les métadonnées à la volée
-export async function generateMetadata(): Promise<Metadata> {
-  const headerList = await headers();
- 
-  const subdomain = extractSubdomain({ url: '', headers: headerList } as any) || 'ong-eden-benin'; // Fallback pour le développement local
-  const data = await getSeoData(subdomain || 'ong-eden-benin');
+type Props = {
+  params: Promise<{ subdomain: string }>;
+  children: React.ReactNode;
+};
 
-  // const entityData = await getEntityData(subdomain);
+// 1. Génération dynamique des métadonnées grâce aux params de la route
+export async function generateMetadata({ params }: { params: Promise<{ subdomain: string }> }): Promise<Metadata> {
+  const { subdomain } = await params;
+  
+  // On récupère les données SEO depuis Sanity avec le sous-domaine exact
+  const data = await getSeoData(subdomain);
 
-  const title = data?.seo?.metaTitle || `${data?.nom }`;
+  const title = data?.seo?.metaTitle || data?.nom || 'Obed Group';
   const description = data?.seo?.metaDescription || `Bienvenue sur le site officiel de ${data?.nom || 'notre filiale'}.`;
   const ogImage = data?.seo?.ogImageUrl || data?.logoUrl || '/default-share-image.png';
-  const favicon = data?.logoUrl || '/favicon.ico'; //
+  const favicon = data?.logoUrl || '/favicon.ico';
 
   return {
     title: title,
     description: description,
-    // icons: {
-    //   icon: favicon,
-    //   shortcut: favicon,
-    //   apple: favicon, // Pour les appareils iOS (Ajout sur l'écran d'accueil)
-    // },
+    icons: {
+      icon: favicon,
+      shortcut: favicon,
+      apple: favicon,
+    },
     openGraph: {
       title: title,
       description: description,
@@ -37,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `Aperçu de ${data?.nom}`,
+          alt: `Aperçu de ${data?.nom || 'notre entité'}`,
         },
       ],
       type: 'website',

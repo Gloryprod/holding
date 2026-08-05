@@ -91,13 +91,13 @@ export default async function Team() {
             <div key={index} className="group flex flex-col">
               {/* Photo avec effet au survol */}
               <div className="relative aspect-4/5 overflow-hidden rounded-2xl mb-6 bg-muted">
-                <Image
+                {/* <Image
                   src={member.image}
                   alt={member.name}
                   width={300}
                   height={300}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                /> */}
 
                 {/* Overlay social au survol */}
                 <div className="absolute inset-0 bg-brand/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Handshake, Heart, Sprout } from "lucide-react";
+import { ArrowRight, Sparkles, Heart, Sprout } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
@@ -18,61 +18,112 @@ interface Entreprise {
 export default function Hero({ data }: { data: Entreprise }) {
   const type = data.typeEntite || 'business';
 
-  // --- DESIGN 1 : BUSINESS (Sombre, Imposant, Épuré) ---
+  // --- DESIGN 1 : BUSINESS ---
   if (type === 'business') {
     return (
-      <section className="relative py-28 flex items-center bg-slate-950 overflow-hidden font-inter">
-        {/* Background : Image avec masque de dégradé latéral pour laisser place au texte */}
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src={urlFor(data.image).url()} 
-            fill 
-            className="object-cover " 
-            alt={data.nom} 
-            priority 
-          />
-          {/* Masque pour assurer la lisibilité du texte à gauche */}
-          <div className="absolute inset-0 bg-linear-to-r from-slate-950 via-slate-950/30 to-transparent" />
-        </div>
+      <section className="relative min-h-screen flex items-center text-foreground overflow-hidden font-inter py-20 lg:py-0 transition-colors duration-300 mt-16">
+      
+      {/* Arrière-plan : Lueurs radiales adaptatives (plus discrètes en mode clair) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 dark:bg-brand/10 blur-[120px] opacity-70 dark:opacity-100" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/5 dark:bg-blue-500/10 blur-[120px] opacity-70 dark:opacity-100" />
+      </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-12 relative z-10">
-          <div className="max-w-3xl">
+      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Colonne gauche : Contenu textuel & Actions */}
+          <div className="lg:col-span-7 flex flex-col justify-center text-left">
+            
+            {/* Badge de surbrillance moderne */}
+            <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-muted/50 dark:bg-white/5 border border-border dark:border-white/10 text-muted-foreground dark:text-white/80 text-xs font-medium mb-6 backdrop-blur-sm">
+              <Sparkles className="w-3.5 h-3.5 text-brand" />
+              <span className="uppercase tracking-widest text-[10px] font-semibold font-geist">Innovation Digitale</span>
+            </div>
 
-            <h1 className="text-5xl md:text-6xl text-center font-black text-white mb-6 tracking-tight font-geist leading-[0.9]">
+            {/* Titre principal */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight font-geist leading-[1.1] mb-6">
               {data.nom}
             </h1>
             
-            <h2 className="text-xl md:text-2xl text-center text-white mb-12 leading-relaxed font-light border-brand/30 pl-6 pr-6">
-              {data.tagline}
-            </h2>
+            {/* Tagline / Description */}
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed font-light">
+              Hygiène, recyclage, agrobusiness et hôtellerie : une même ambition, transformer durablement le territoire béninois.
+            </p>
 
-            <div className="text-center gap-5">
-              <Link href="/about">
-                <button className="cursor-pointer group relative px-8 py-4 bg-brand text-brand-foreground rounded-lg font-black font-geist uppercase tracking-tighter overflow-hidden transition-all hover:scale-105 active:scale-95">
-                  <span className="relative z-10 flex items-center gap-2">
-                    Découvrir nos projets <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            {/* Double Bouton d'Action (CTA) */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <Link href="/about" className="w-full sm:w-auto">
+                {/* On s'appuie sur la variable brand-rgb pour l'ombre fluide au survol */}
+                <button className="cursor-pointer group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-xl font-bold font-geist uppercase tracking-wider text-xs overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--brand-rgb,74,222,128),0.35)] hover:-translate-y-0.5 active:translate-y-0">
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Découvrir nos projets 
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
-                  {/* Effet de reflet au survol */}
-                  <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                </button>
+              </Link>
+              
+              <Link href="/contact" className="w-full sm:w-auto">
+                <button className="cursor-pointer w-full sm:w-auto px-8 py-4 bg-muted/60 hover:bg-muted text-foreground border border-border hover:border-brand/30 dark:hover:border-white/20 rounded-xl font-bold font-geist uppercase tracking-wider text-xs transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-sm">
+                  Nous contacter
                 </button>
               </Link>
             </div>
 
-            {/* Petits indicateurs de confiance en bas (Optionnel) */}
-            <div className="mt-20 pt-10 border-t text-center border-white/10 flex gap-12 items-center opacity-50">
-               <div className="text-white text-sm">
-                  <p className="font-black text-xl">100%</p>
-                  <p className="uppercase text-[10px] tracking-widest">Digitalisé</p>
-               </div>
-               <div className="text-white text-sm">
-                  <p className="font-black text-xl">B2B</p>
-                  <p className="uppercase text-[10px] tracking-widest">Standard</p>
-               </div>
+            {/* Section Statistiques / Réassurance épurée */}
+            <div className="flex items-center gap-8 pt-8 border-t border-border max-w-md">
+              <div className="flex flex-col">
+                <span className="text-2xl font-black text-foreground">100%</span>
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">Digitalisé</span>
+              </div>
+              <div className="h-8 w-px bg-border" />
+              <div className="flex flex-col">
+                <span className="text-2xl font-black text-foreground">B2B</span>
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">Standard</span>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-linear-to-t from-background to-transparent z-10"></div>
+          </div>
+
+          {/* Colonne droite : Showcase visuel dynamique */}
+          <div className="lg:col-span-5 relative w-full h-[350px] sm:h-[450px] lg:h-[500px] flex items-center justify-center">
+            
+            {/* Effet lumineux derrière l'image */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-brand/20 to-blue-500/20 rounded-3xl filter blur-2xl opacity-70 dark:opacity-50 animate-pulse duration-[4000ms]" />
+            
+            {/* Cadre de l'image de marque */}
+            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-2xl shadow-muted/30 dark:shadow-black/80 group">
+              <Image 
+                src={urlFor(data.image).url()} 
+                fill 
+                className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                alt={data.nom} 
+                priority 
+              />
+              {/* Masque dégradé subtil sur le bas de l'image */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-80" />
+              
+              {/* Mini carte flottante interactive en bas de l'image */}
+              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/95 dark:bg-slate-950/85 backdrop-blur-md border border-border dark:border-white/10 flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] text-brand uppercase font-bold tracking-wider">Devise</p>
+                  <h4 className="text-sm font-bold text-foreground dark:text-white">{data.tagline}</h4>
+                </div>
+                <div className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      {/* Transition douce vers la section suivante */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
       </section>
     );
   }
@@ -90,7 +141,7 @@ export default function Hero({ data }: { data: Entreprise }) {
               {data.nom} : <span className="text-brand">Agir</span> pour demain.
             </h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-lg leading-relaxed">
-              {data.tagline}
+              Des solutions innovantes face aux défis environnementaux et climatiques, au plus près des communautés béninoises.
             </p>
             <div className=" items-center">
               <Link href="/about">
@@ -148,7 +199,7 @@ export default function Hero({ data }: { data: Entreprise }) {
             </h1>
             <div className="relative mb-12">
                 <p className="text-2xl text-muted-foreground italic border-l-8 border-brand pl-8 py-2 leading-relaxed">
-                &quot;{data.tagline}&quot;
+                &quot;Une coopérative de producteurs qui allie innovation et solidarité pour une agriculture qui respecte la terre.&quot;
                 </p>
             </div>
             

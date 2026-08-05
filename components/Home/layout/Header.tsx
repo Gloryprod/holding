@@ -1,10 +1,12 @@
 'use client';
 import { ThemeToggle } from "@/components/ThemeToggle";
 import  Link  from "next/link";
+import Image from "next/image";
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { urlFor } from "@/sanity/lib/image";
 
   interface Entreprise {
     nom: string;
@@ -17,6 +19,7 @@ import { useState } from "react";
     adresse: string;
     telephone: string;
     email: string;
+    logo: string;
     services: {
       titre: string;
       description: string;
@@ -37,24 +40,26 @@ import { useState } from "react";
     <header className="fixed top-0 left-0 w-full bg-transparent shadow backdrop-blur-sm z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
-        <Link href="/" className="flex items-center gap-2">
-          <h1 className="text-2xl font-heading font-bold text-brand tracking-tight">
-            {/* {data.logo && (
-              <div className="flex justify-center lg:justify-start">
-                  <div className="p-4 rounded-3xl bg-muted/50">
-                  <Image 
-                      src={urlFor(data.logo).url()} 
-                      alt={data.nom} 
-                      width={70} 
-                      height={70}
-                      priority
-                      className="object-contain" 
-                  />
-                  </div>
-              </div>
-            )} */}
-            {data?.nom || "Obed Group"}
-          </h1>
+        {/* Logo / Brand Link */}
+        <Link href="/" className="flex items-center gap-1 group">
+          {data?.logo ? (
+            /* Le conteneur définit des dimensions claires pour l'image */
+            <div className="relative w-auto h-10 md:h-12 aspect-3/1 flex items-center">
+              <Image 
+                src={urlFor(data.logo).url()} 
+                alt={data?.nom || "Logo"} 
+                width={200}
+                height={60}
+                className="w-auto h-full object-contain dark:brightness-0 dark:invert"
+                priority
+              />
+            </div>
+          ) : (
+            /* Nom de secours si pas de logo */
+            <span className="text-xl md:text-2xl font-heading font-black text-brand tracking-tight">
+              {data?.nom || "Obed Group"}
+            </span>
+          )}
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8">

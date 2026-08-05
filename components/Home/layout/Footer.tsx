@@ -1,6 +1,8 @@
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { FacebookIcon, LinkedinIcon } from "./Team";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 interface Entreprise {
   nom: string;
@@ -13,6 +15,7 @@ interface Entreprise {
   adresse: string;
   telephone: string;
   email: string;
+  logo: string;
   linkedin: string;
   facebook: string;
   services: {
@@ -51,7 +54,24 @@ export default function Footer({ data }: { data: Entreprise }) {
           {/* Colonne 1 : À propos */}
           <div className="space-y-6">
             <h3 className="text-2xl font-heading font-bold text-foreground">
-              <span className="text-brand">{data.nom}</span>
+              {data?.logo ? (
+                /* Le conteneur définit des dimensions claires pour l'image */
+                <div className="relative w-auto h-10 md:h-12 aspect-3/1 flex items-center">
+                  <Image 
+                    src={urlFor(data.logo).url()} 
+                    alt={data?.nom || "Logo"} 
+                    width={200}
+                    height={60}
+                    className="w-auto h-full object-contain dark:brightness-0  dark:invert"
+                    priority
+                  />
+                </div>
+              ) : (
+                /* Nom de secours si pas de logo */
+                <span className="text-xl md:text-2xl font-heading font-black text-brand tracking-tight">
+                  {data?.nom || "Obed Group"}
+                </span>
+              )}
             </h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
               {data.tagline || "Votre partenaire de confiance pour un avenir meilleur."}
