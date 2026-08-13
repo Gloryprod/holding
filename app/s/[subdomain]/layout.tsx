@@ -4,13 +4,14 @@ import { getSeoData } from "@/lib/getSeoData";
 import Header from "@/components/Home/layout/Header";
 import Footer from "@/components/Home/layout/Footer";
 import { Metadata } from "next";
-import { headers } from "next/headers";
-import {extractSubdomain} from "@/middleware";
+import NotFound from "./not-found";
+// import { headers } from "next/headers";
+// import {extractSubdomain} from "@/middleware";
 
-type Props = {
-  params: Promise<{ subdomain: string }>;
-  children: React.ReactNode;
-};
+// type Props = {
+//   params: Promise<{ subdomain: string }>;
+//   children: React.ReactNode;
+// };
 
 // 1. Génération dynamique des métadonnées grâce aux params de la route
 export async function generateMetadata({ params }: { params: Promise<{ subdomain: string }> }): Promise<Metadata> {
@@ -18,6 +19,14 @@ export async function generateMetadata({ params }: { params: Promise<{ subdomain
   
   // On récupère les données SEO depuis Sanity avec le sous-domaine exact
   const data = await getSeoData(subdomain);
+
+  // Fallback propre si l'entité n'existe pas
+  if (!data) {
+    return {
+      title: "Page introuvable",
+      description: "La page demandée est introuvable.",
+    };
+  }
 
   const title = data?.seo?.metaTitle || data?.nom || 'Obed Group';
   const description = data?.seo?.metaDescription || `Bienvenue sur le site officiel de ${data?.nom || 'notre filiale'}.`;
@@ -64,12 +73,16 @@ export default async function SubdomainLayout({
   const { subdomain } = await params;
   const data = await getEntityData(subdomain);
 
+  if (!data) {
+    return <NotFound />;
+  }
+
   return (
     <>
       {/* Le Header reçoit les données et reste présent sur TOUTES les pages */}
       <Header data={data} />
       <main className="">
-        {children} {/* C'est ici que s'afficheront tes pages (Home, About, etc.) */}
+        {children}
       </main>
       <Footer data={data} />
 
