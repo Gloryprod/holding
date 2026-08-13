@@ -318,7 +318,7 @@ export function ContactForm({ data }: ContactFormProps) {
               type="text" 
               required
               value={formData.name}
-              placeholder="Ex: Gloria Ouinsou"
+              placeholder="Ex: John Doe"
               className="w-full px-5 py-4 rounded-2xl bg-muted/50 border border-border focus:border-brand focus:ring-1 focus:ring-brand outline-none transition-all"
               onChange={(e) => setFormData({...formData, name: e.target.value})}
             />
