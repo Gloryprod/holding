@@ -5,6 +5,8 @@ import Header from "@/components/Home/layout/Header";
 import Footer from "@/components/Home/layout/Footer";
 import { Metadata } from "next";
 import NotFound from "./not-found";
+import { Analytics } from "@vercel/analytics/next"
+
 // import { headers } from "next/headers";
 // import {extractSubdomain} from "@/middleware";
 
