@@ -152,10 +152,11 @@ export async function middleware(request: NextRequest) {
   // CAS 2 : L'utilisateur arrive sur le domaine principal (ex: horyzion.com ou localhost:3000)
   // Il n'y a pas de landing page -> Redirection directe vers la filiale par défaut
   const host = request.headers.get('host') || '';
+  const hostWithoutWww = host.replace(/^www\./, ''); // "www.horyzion.com" devient "horyzion.com"
   const protocol = request.nextUrl.protocol;
 
   // On reconstruit l'URL complète avec le sous-domaine par défaut
-  const redirectUrl = `${protocol}//${DEFAULT_SUBDOMAIN}.${host}${pathname}${search}`;
+  const redirectUrl = `${protocol}//${DEFAULT_SUBDOMAIN}.${hostWithoutWww}${pathname}${search}`;
 
   return NextResponse.redirect(redirectUrl);
 }
