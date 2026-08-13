@@ -86,13 +86,12 @@ import { NextRequest, NextResponse } from 'next/server';
 export const config = {
   matcher: [
     /*
-     * On exclut de la redirection/réécriture :
-     * - les routes d'API
-     * - les fichiers statiques de Next.js (_next)
-     * - le studio Sanity
-     * - les fichiers avec extension (images .png, .jpg, favicon, .svg, etc.) dans /public
+     * Exclut :
+     * - api, _next/static, _next/image, studio, favicon.ico
+     * - les fichiers avec extensions (ex: .png, .jpg, .css) 
+     *   MAIS AUTORISE explicitement sitemap.xml et robots.txt
      */
-    '/((?!api|_next/static|_next/image|studio|favicon.ico|.*\\..*).*)',
+    '/((?!api|_next/static|_next/image|studio|favicon.ico|(?:(?!sitemap\\.xml|robots\\.txt).)*\\..*).*)',
   ],
 };
 
@@ -141,6 +140,11 @@ export async function middleware(request: NextRequest) {
     // Bloquer l'accès aux pages admin depuis les sous-domaines
     if (pathname.startsWith('/admin')) {
       return NextResponse.redirect(new URL('/', request.url));
+    }
+
+    // Intercepte spécifiquement /sitemap.xml et renvoie le contenu de /api/sitemap
+    if (pathname === '/sitemap.xml') {
+      return NextResponse.rewrite(new URL('/api/sitemap', request.url));
     }
 
     // Réécriture transparente vers l'application multi-tenant
