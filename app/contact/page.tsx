@@ -93,7 +93,7 @@ export default function ContactForm() {
                 </div>
               </div>
 
-              {/* SÉLECTEUR DE TYPE D'ORGANISATION (Ton besoin spécifique) */}
+              {/* SÉLECTEUR DE TYPE D'ORGANISATION */}
               <div className="space-y-2">
                 <label className="text-sm font-bold ml-1 flex items-center gap-2">
                   <Building2 size={16} /> Type d&apos;organisation

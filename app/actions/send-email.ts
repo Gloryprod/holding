@@ -15,7 +15,7 @@ interface FormData {
 export async function sendContactEmail(formData: FormData, entrepriseNom: string, emailDestinataire: string) {
   try {
     const { name, email, profileType, subject, message } = formData;
-    const emailExpediteur = `${entrepriseNom} <onboarding@resend.dev>`;
+    const emailExpediteur = `"${entrepriseNom}" <onboarding@resend.dev>`;
 
     const { data, error } = await resend.emails.send({
       from: emailExpediteur,
@@ -32,11 +32,24 @@ export async function sendContactEmail(formData: FormData, entrepriseNom: string
       `,
     });
 
-    if (error) return { success: false, error: error.message };
+    if (error) {
+      console.error("❌ Erreur retournée par Resend:", error);
+      // S'assurer de renvoyer une chaîne de caractères pure
+      return { 
+        success: false, 
+        error: typeof error === "string" ? error : error.message || "Échec de l'envoi du mail, veuillez réessayer plus tard." 
+      };
+    }
     return { success: true, data };
 
   } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : String(err);
-    return { success: false, error: message || "Erreur serveur" };
+    console.error("💥 Exception Server Action:", err);
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    
+    // Renvoyer toujours un type primitif (string) pour que Next.js ne masque pas l'erreur
+    return { 
+      success: false, 
+      error: errorMessage || "Erreur interne du serveur lors de l'envoi" 
+    };
   }
 }
