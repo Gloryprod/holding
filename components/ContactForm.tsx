@@ -218,7 +218,7 @@ export function ContactForm({ data }: ContactFormProps) {
         toast.success(`Votre message a été envoyé avec succès à l'équipe de ${data.nom} !`);
         setFormData(initialFormState); // Réinitialisation après succès
       } else {
-        toast.error(`Erreur lors de l'envoi : ${result.error}`);
+        toast.error(`Erreur lors de l'envoi, veuillez réessayer ultérieurement`);
       }
     } catch (error: any) {
       // Détection de la désynchronisation de Server Action post-déploiement
