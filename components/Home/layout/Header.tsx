@@ -31,6 +31,7 @@ import { urlFor } from "@/sanity/lib/image";
  
   const [open, setOpen] = useState(false);
   const desktopNavLinks = [
+    { label: "Accueil", href: `/` },
     { label: "À propos", href: `/about` },
     { label: "Pourquoi investir ?", href: `/partners` },
     { label: "Contact", href: `/contact` },
@@ -101,8 +102,8 @@ import { urlFor } from "@/sanity/lib/image";
                 <SheetTitle className="sr-only">Menu de navigation</SheetTitle>
                 <div className="flex items-center justify-between pt-8 pb-6 px-6 border-b border-border/50">
                     <div className="flex items-center gap-2">
-                    <span className="text-2xl font-heading font-black text-brand italic">
-                        Holding
+                    <span className="text-xl font-heading font-black text-brand italic">
+                        {data.nom}
                     </span>
                     </div>
                 </div>

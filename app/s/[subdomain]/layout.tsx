@@ -6,6 +6,7 @@ import Footer from "@/components/Home/layout/Footer";
 import { Metadata } from "next";
 import NotFound from "./not-found";
 import { Analytics } from "@vercel/analytics/next"
+import { JsonLd } from '@/components/json-ld';
 
 // import { headers } from "next/headers";
 // import {extractSubdomain} from "@/middleware";
@@ -30,13 +31,26 @@ export async function generateMetadata({ params }: { params: Promise<{ subdomain
     };
   }
 
+  // Construction dynamique du domaine canonique
+  // Si subdomain est vide ou principal, on pointe sur horyzion.com, sinon sur le sous-domaine
+  const isMainDomain = !subdomain || subdomain === 'main' || subdomain === 'www';
+  const domainUrl = isMainDomain 
+    ? 'https://horyzion.com' 
+    : `https://${subdomain}.horyzion.com`;
+
   const title = data?.seo?.metaTitle || data?.nom || 'Obed Group';
   const description = data?.seo?.metaDescription || `Bienvenue sur le site officiel de ${data?.nom || 'notre filiale'}.`;
   const ogImage = data?.seo?.ogImageUrl || data?.logoUrl || '/default-share-image.png';
   const favicon = data?.logoUrl || '/favicon.ico';
+  const keywords = data?.seo?.keywords || [data?.nom, 'horyzion', 'cooperative', 'bénin', 'ong eden bénin', 'business', 'sarl', 'agritropic', 'bbs-wbb'];
 
   return {
+    metadataBase: new URL(domainUrl),
     title: title,
+    keywords: keywords,
+    alternates: {
+      canonical: '/', // Pointe automatiquement vers l'URL exacte du sous-domaine défini dans metadataBase
+    },
     description: description,
     icons: {
       icon: favicon,
@@ -81,6 +95,8 @@ export default async function SubdomainLayout({
 
   return (
     <>
+      {/* Script JSON-LD injecté spécifiquement pour le sous-domaine actif */}
+      <JsonLd data={data} subdomain={subdomain} />
       {/* Le Header reçoit les données et reste présent sur TOUTES les pages */}
       <Header data={data} />
       <main className="">
