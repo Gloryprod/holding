@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Horyzion - Plateforme Multi-Tenant
 
-## Getting Started
+**Horyzion** est une plateforme web multi-tenant centralisée, conçue pour vitriner et gérer les projets, filiales et sous-entités (ONG EDEN Bénin, Agritropic, BBS-WBB, etc.) via des sous-domaines dédiés.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Stack Technique
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Frontend / Framework :** Next.js (App Router), TypeScript, Tailwind CSS
+* **CMS Headless :** Sanity.io
+* **Services Email :** Resend API, Webmail LWS
+* **Déploiement :** Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔑 Fonctionnalités Clés
 
-## Learn More
+* 🌐 **Routage Multi-Tenant :** Gestion dynamique des sous-domaines (`*.horyzion.com`).
+* 🏷️ **SEO & Métadonnées Dynamiques :** Données structurées (JSON-LD), OpenGraph et favicons personnalisés par sous-domaine.
+* 📩 **Formulaire de Contact & Notifications :** Envoi d'e-mails via Resend et réception centralisée.
+* 🌍 **Bilinguisme (À venir) :** Internationalisation dynamique (FR/EN) intégrée.
+* 🔔 **Automatisation (À venir) :** Notifications instantanées Telegram via n8n.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Liens Utiles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Site Officiel : horyzion.com
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
