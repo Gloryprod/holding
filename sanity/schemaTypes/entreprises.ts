@@ -16,7 +16,7 @@ export const entrepriseType = defineType({
     defineField({
       name: 'tagline',
       title: 'Slogan / Phrase d’accroche',
-      type: 'string',
+      type: 'localeString',
       description: 'Ex: L’union des forces pour une économie solidaire',
     }),
     defineField({
@@ -29,7 +29,7 @@ export const entrepriseType = defineType({
     defineField({
       name: 'iconName',
       title: 'Icône de l’entité (Lucide)',
-      type: 'string',
+      type: 'localeString',
       description: 'Le nom de l’icône Lucide à afficher (ex: Sprout, Heart, Factory).',
     }),
     defineField({
@@ -47,13 +47,13 @@ export const entrepriseType = defineType({
     defineField({
       name: 'description',
       title: 'Description détaillée',
-      type: 'text',
+      type: 'localeText',
       description: 'Le texte complet présentant l’organisation.',
     }),
     defineField({
       name: 'mission',
       title: 'Mission & Vision (Résumé)',
-      type: 'text',
+      type: 'localeText',
       description: 'Une version courte pour les survols ou les résumés.',
     }),
     defineField({
@@ -64,8 +64,8 @@ export const entrepriseType = defineType({
         defineArrayMember({
           type: 'object',
           fields: [
-            { name: 'titre', type: 'string', title: 'Nom du service' },
-            { name: 'description', type: 'text', title: 'Description du service' },
+            { name: 'titre', type: 'localeString', title: 'Nom du service' },
+            { name: 'description', type: 'localeText', title: 'Description du service' },
           ],
         }),
       ],
@@ -122,14 +122,13 @@ export const entrepriseType = defineType({
         {
           name: 'metaTitle',
           title: 'Titre Meta',
-          type: 'string',
+          type: 'localeString',
           description: 'Le titre affiché dans les onglets du navigateur et Google (60-70 caractères).'
         },
         {
           name: 'metaDescription',
           title: 'Description Meta',
-          type: 'text',
-          rows: 3,
+          type: 'localeText',
           description: 'Le résumé affiché dans les résultats Google (150-160 caractères).'
         },
         {

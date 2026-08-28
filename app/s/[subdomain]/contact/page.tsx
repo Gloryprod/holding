@@ -30,7 +30,7 @@ export default async function ContactPage({params}: {params: Promise<{ subdomain
             <div className="space-y-6">
               {[
                 { icon: <Phone size={20} />, label: "Téléphone", value: data.telephone || "+123 456 7890" },
-                { icon: <Mail size={20} />, label: "Email", value: data.email || "contact@obedgroup.com" },
+                { icon: <Mail size={20} />, label: "Email", value: "contact@horyzion.com" },
                 { icon: <MapPin size={20} />, label: "Siège Social", value: data.address || "Rue de la Synergie, Ville, Pays"  },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-muted/30 border border-border/50">

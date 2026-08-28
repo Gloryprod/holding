@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { Geist, Playfair_Display, Geist_Mono, Inter } from 'next/font/google'
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -41,14 +43,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         > 
-          <Toaster
-                position="top-right"
-                toastOptions={{
-                duration: 6000,
-                style: { borderRadius: '10px' },
+          <LanguageProvider>
+            <Toaster
+                  position="top-right"
+                  toastOptions={{
+                  duration: 6000,
+                  style: { borderRadius: '10px' },
                 }}
             />
-          {children}
+            {children}
+          </LanguageProvider>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

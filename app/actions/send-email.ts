@@ -15,11 +15,11 @@ interface FormData {
 export async function sendContactEmail(formData: FormData, entrepriseNom: string, emailDestinataire: string) {
   try {
     const { name, email, profileType, subject, message } = formData;
-    const emailExpediteur = `"${entrepriseNom}" <onboarding@resend.dev>`;
+    const emailExpediteur = `"${entrepriseNom}" <contact@horyzion.com>`;
 
     const { data, error } = await resend.emails.send({
       from: emailExpediteur,
-      to: [emailDestinataire], // Reçoit le mail sur son adresse spécifique (ex: eden@gmail.com)
+      to: ['contact@horyzion.com'], 
       subject: `[Formulaire de Contact] ${subject}`,
       replyTo: email, // TRÈS IMPORTANT : Permet à la filiale de répondre directement au visiteur
       html: `

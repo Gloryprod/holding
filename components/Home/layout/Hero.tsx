@@ -5,6 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 
+// Importations Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
+
+// Styles Swiper obligatoires
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
+
 interface Entreprise {
   nom: string;
   tagline: string;
@@ -17,129 +26,251 @@ interface Entreprise {
 
 export default function Hero({ data }: { data: Entreprise }) {
   const type = data.typeEntite || 'business';
+  const images = [
+    '/business1.jpg',
+    '/business2.jpg',
+    '/cooperative1.jpg',
+    '/cooperative2.jpg',
+    '/hero5.jpg',
+  ]
 
   // --- DESIGN 1 : BUSINESS ---
   if (type === 'business') {
-    return (
-      <section className="relative min-h-screen flex items-center text-foreground overflow-hidden font-inter py-20 lg:py-0 transition-colors duration-300 mt-16">
-      
-      {/* Arrière-plan : Lueurs radiales adaptatives (plus discrètes en mode clair) */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 dark:bg-brand/10 blur-[120px] opacity-70 dark:opacity-100" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/5 dark:bg-blue-500/10 blur-[120px] opacity-70 dark:opacity-100" />
+    switch (data.nom) {
+      case 'Benin Bien Etre Services Well Being Business':
+        return (
+          <section className="relative min-h-screen flex items-center text-foreground overflow-hidden font-inter py-20 lg:py-0 transition-colors duration-300 mt-16">
+          
+          {/* Arrière-plan : Lueurs radiales adaptatives (plus discrètes en mode clair) */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 dark:bg-brand/10 blur-[120px] opacity-70 dark:opacity-100" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/5 dark:bg-blue-500/10 blur-[120px] opacity-70 dark:opacity-100" />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+              
+              {/* Colonne gauche : Contenu textuel & Actions */}
+              <div className="lg:col-span-7 flex flex-col justify-center text-left">
+                
+                {/* Badge de surbrillance moderne */}
+                <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-muted/50 dark:bg-white/5 border border-border dark:border-white/10 text-muted-foreground dark:text-white/80 text-xs font-medium mb-6 backdrop-blur-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-brand" />
+                  <span className="uppercase tracking-widest text-[10px] font-semibold font-geist">Innovation Digitale</span>
+                </div>
+
+                {/* Titre principal */}
+                <h1 className="text-4xl sm:text-5xl md:text-5xl font-black text-foreground tracking-tight font-geist leading-[1.1] mb-6">
+                  <span>Bénin Bien Etre Service</span> <br />
+                  <span>Well Being Business</span>
+                </h1>
+                
+                {/* Tagline / Description */}
+                <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed font-light">
+                  Hygiène, recyclage, agrobusiness et hôtellerie : une même ambition, transformer durablement le territoire béninois.
+                </p>
+
+                {/* Double Bouton d'Action (CTA) */}
+                <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                  <Link href="/about" className="w-full sm:w-auto">
+                    {/* On s'appuie sur la variable brand-rgb pour l'ombre fluide au survol */}
+                    <button className="cursor-pointer group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-xl font-bold font-geist uppercase tracking-wider text-xs overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--brand-rgb,74,222,128),0.35)] hover:-translate-y-0.5 active:translate-y-0">
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        Découvrir nos projets 
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                      <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                    </button>
+                  </Link>
+                  
+                  <Link href="/contact" className="w-full sm:w-auto">
+                    <button className="cursor-pointer w-full sm:w-auto px-8 py-4 bg-muted/60 hover:bg-muted text-foreground border border-border hover:border-brand/30 dark:hover:border-white/20 rounded-xl font-bold font-geist uppercase tracking-wider text-xs transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-sm">
+                      Nous contacter
+                    </button>
+                  </Link>
+                </div>
+
+                {/* Section Statistiques / Réassurance épurée */}
+                <div className="flex items-center gap-8 pt-8 border-t border-border max-w-md">
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-black text-foreground">100%</span>
+                    <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">Digitalisé</span>
+                  </div>
+                  <div className="h-8 w-px bg-border" />
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-black text-foreground">B2B</span>
+                    <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">Standard</span>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Colonne droite : Showcase visuel dynamique */}
+              <div className="lg:col-span-5 relative w-full h-[350px] sm:h-[450px] lg:h-[500px] flex items-center justify-center">
+                
+                {/* Effet lumineux derrière l'image */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-brand/20 to-blue-500/20 rounded-3xl filter blur-2xl opacity-70 dark:opacity-50 animate-pulse duration-[4000ms]" />
+                
+                {/* Cadre de l'image de marque */}
+                <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-2xl shadow-muted/30 dark:shadow-black/80 group">
+                  <Image 
+                    src={urlFor(data.image).url()} 
+                    fill 
+                    className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                    alt={data.nom} 
+                    priority 
+                  />
+                  {/* Masque dégradé subtil sur le bas de l'image */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-80" />
+                  
+                  {/* Mini carte flottante interactive en bas de l'image */}
+                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/95 dark:bg-slate-950/85 backdrop-blur-md border border-border dark:border-white/10 flex items-center justify-between">
+                    <div>
+                      <p className="text-[10px] text-brand uppercase font-bold tracking-wider">Devise</p>
+                      <h4 className="text-sm font-bold text-foreground dark:text-white">{data.tagline}</h4>
+                    </div>
+                    <div className="relative flex h-3 w-3">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          {/* Transition douce vers la section suivante */}
+          <div className="absolute bottom-0 left-0 w-full h-24 bg-linear-to-t from-background to-transparent z-10 pointer-events-none" />
+          </section>
+        );
+      break;
+
+      case 'KODANU':
+        return (
+          <section className="relative min-h-screen flex flex-col justify-center items-center text-center font-inter pt-28 pb-16 px-6 overflow-hidden bg-background">
+      {/* Arrière-plan dynamique & Orbes animés */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-brand/20 via-emerald-500/15 to-amber-500/10 rounded-full blur-[140px] animate-pulse duration-[6000ms]" />
+        <div className="absolute bottom-[20%] right-[-5%] w-[400px] h-[400px] bg-brand/10 rounded-full blur-[120px] animate-pulse duration-[8000ms]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:36px_36px] [mask-image:radial-gradient(ellipse_75%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Colonne gauche : Contenu textuel & Actions */}
-          <div className="lg:col-span-7 flex flex-col justify-center text-left">
-            
-            {/* Badge de surbrillance moderne */}
-            <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-muted/50 dark:bg-white/5 border border-border dark:border-white/10 text-muted-foreground dark:text-white/80 text-xs font-medium mb-6 backdrop-blur-sm">
-              <Sparkles className="w-3.5 h-3.5 text-brand" />
-              <span className="uppercase tracking-widest text-[10px] font-semibold font-geist">Innovation Digitale</span>
-            </div>
+      {/* Contenu principal */}
+      <div className="max-w-4xl mx-auto z-10 flex flex-col items-center animate-in fade-in slide-in-from-bottom-6 duration-700 ease-out">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/25 text-brand text-xs font-semibold mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(var(--brand-rgb,74,222,128),0.15)] transition-all hover:scale-105">
+          <Sparkles className="w-3.5 h-3.5 animate-spin-slow text-amber-400" />
+          <span className="uppercase tracking-widest text-[10px] font-bold font-geist">
+            Construire utile, construire vrai
+          </span>
+        </div>
 
-            {/* Titre principal */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight font-geist leading-[1.1] mb-6">
-              <span>Bénin Bien Etre Service</span> <br />
-              <span>Well Being Business</span>
-            </h1>
-            
-            {/* Tagline / Description */}
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed font-light">
-              Hygiène, recyclage, agrobusiness et hôtellerie : une même ambition, transformer durablement le territoire béninois.
-            </p>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl font-black font-geist tracking-tight leading-[1.05] mb-6">
+          KODANU <br />
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-brand via-emerald-400 to-amber-400 animate-gradient-x">
+            Innover pour impacter.
+          </span>
+        </h1>
 
-            {/* Double Bouton d'Action (CTA) */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Link href="/about" className="w-full sm:w-auto">
-                {/* On s'appuie sur la variable brand-rgb pour l'ombre fluide au survol */}
-                <button className="cursor-pointer group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-xl font-bold font-geist uppercase tracking-wider text-xs overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--brand-rgb,74,222,128),0.35)] hover:-translate-y-0.5 active:translate-y-0">
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Découvrir nos projets 
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                </button>
-              </Link>
-              
-              <Link href="/contact" className="w-full sm:w-auto">
-                <button className="cursor-pointer w-full sm:w-auto px-8 py-4 bg-muted/60 hover:bg-muted text-foreground border border-border hover:border-brand/30 dark:hover:border-white/20 rounded-xl font-bold font-geist uppercase tracking-wider text-xs transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-sm">
-                  Nous contacter
-                </button>
-              </Link>
-            </div>
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl font-light mb-10 leading-relaxed">
+          Entreprise africaine combinant conseil stratégique, ingénierie technologique et solutions d'avenir pour répondre aux défis de demain.
+        </p>
 
-            {/* Section Statistiques / Réassurance épurée */}
-            <div className="flex items-center gap-8 pt-8 border-t border-border max-w-md">
-              <div className="flex flex-col">
-                <span className="text-2xl font-black text-foreground">100%</span>
-                <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">Digitalisé</span>
-              </div>
-              <div className="h-8 w-px bg-border" />
-              <div className="flex flex-col">
-                <span className="text-2xl font-black text-foreground">B2B</span>
-                <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">Standard</span>
-              </div>
-            </div>
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full sm:w-auto">
+          <Link href="/about" className="w-full sm:w-auto">
+            <button className="group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-2xl font-bold font-geist text-xs uppercase tracking-wider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-5px_rgba(var(--brand-rgb,74,222,128),0.4)] active:translate-y-0 cursor-pointer">
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                Explorer nos pôles
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            </button>
+          </Link>
 
-          </div>
-
-          {/* Colonne droite : Showcase visuel dynamique */}
-          <div className="lg:col-span-5 relative w-full h-[350px] sm:h-[450px] lg:h-[500px] flex items-center justify-center">
-            
-            {/* Effet lumineux derrière l'image */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-brand/20 to-blue-500/20 rounded-3xl filter blur-2xl opacity-70 dark:opacity-50 animate-pulse duration-[4000ms]" />
-            
-            {/* Cadre de l'image de marque */}
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-2xl shadow-muted/30 dark:shadow-black/80 group">
-              <Image 
-                src={urlFor(data.image).url()} 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105" 
-                alt={data.nom} 
-                priority 
-              />
-              {/* Masque dégradé subtil sur le bas de l'image */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-80" />
-              
-              {/* Mini carte flottante interactive en bas de l'image */}
-              <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/95 dark:bg-slate-950/85 backdrop-blur-md border border-border dark:border-white/10 flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] text-brand uppercase font-bold tracking-wider">Devise</p>
-                  <h4 className="text-sm font-bold text-foreground dark:text-white">{data.tagline}</h4>
-                </div>
-                <div className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
+          <Link href="/contact" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-8 py-4 bg-muted/60 hover:bg-muted text-foreground border border-border/80 hover:border-brand/40 rounded-2xl font-bold font-geist text-xs uppercase tracking-wider transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm cursor-pointer">
+              Nous contacter
+            </button>
+          </Link>
         </div>
       </div>
 
-      {/* Transition douce vers la section suivante */}
+      {/* Large Banner Image Slider / Cadre Glassmorphic */}
+      <div className="w-full max-w-6xl z-10 group relative animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200 ease-out">
+        <div className="absolute -inset-1 bg-gradient-to-r from-brand/40 via-emerald-500/30 to-amber-500/30 rounded-[32px] blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
+
+        <div className="relative w-full h-[320px] sm:h-[480px] rounded-3xl overflow-hidden border border-white/10 dark:border-white/15 bg-card/50 backdrop-blur-md shadow-2xl">
+          {images.length > 0 ? (
+            <Swiper
+              modules={[Autoplay, EffectFade, Pagination]}
+              effect="fade"
+              speed={1500}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              className="w-full h-full hero-swiper"
+            >
+              {images.map((img: any, index: number) => {
+                // const imgUrl = urlFor(img).url();
+                return (
+                  <SwiperSlide key={index} className="relative w-full h-full">
+                    <Image
+                      src={img}
+                      fill
+                      sizes="(max-width: 1200px) 100vw, 1100px"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      alt={`${data?.nom || "KODANU"} slide ${index + 1}`}
+                      priority={index === 0}
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          ) : (
+            <Image
+              src="/placeholder.jpg"
+              fill
+              className="object-cover"
+              alt="Placeholder"
+            />
+          )}
+
+          {/* Overlay dégradé inférieur */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 z-10 pointer-events-none" />
+
+          {/* Badge Flottant Bas Gauche */}
+          <div className="absolute bottom-6 left-6 right-6 sm:right-auto p-4 rounded-2xl bg-background/80 dark:bg-slate-950/80 backdrop-blur-md border border-border flex items-center gap-4 max-w-md shadow-lg z-20 pointer-events-none">
+            <div className="w-3 h-3 rounded-full bg-brand animate-ping shrink-0" />
+            <div className="text-left">
+              <p className="text-[10px] text-brand uppercase font-bold tracking-wider">Slogan</p>
+              <p className="text-xs font-semibold text-foreground mt-0.5">
+                {data?.tagline || "Transformer les défis continentaux en opportunités d'avenir."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Fondu de fermeture vers le bas */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
-      </section>
-    );
+    </section>
+        );
+      break;
+    }
+    
   }
 
   // --- DESIGN 2 : SOCIAL (Split Layout - Chaleureux & Humain) ---
   if (type === 'social') {
     return (
-      <section className="relative min-h-[90vh] flex items-center bg-background py-22 lg:py-0 transition-colors duration-300 font-inter mt-20">
+      <section className="relative min-h-screen flex items-center bg-background py-22 lg:py-0 transition-colors duration-300 font-inter mt-20">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="order-2 lg:order-1">
             <div className="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mb-8">
               <Heart className="w-8 h-8 text-brand fill-brand/20" />
             </div>
             <h1 className="text-5xl md:text-6xl font-black text-foreground mb-6 leading-[1.1] font-geist">
-              {data.nom} : <span className="text-brand">Agir</span> pour demain.
+              <span>{data.nom} :</span> <br /><span className="text-brand">Agir</span> pour demain.
             </h1>
             <p className="text-lg text-muted-foreground mb-10 max-w-lg leading-relaxed">
               Des solutions innovantes face aux défis environnementaux et climatiques, au plus près des communautés béninoises.
@@ -153,12 +284,12 @@ export default function Hero({ data }: { data: Entreprise }) {
             </div>
           </div>
           
-          <div className="order-2 lg:order-1 relative h-125 w-full">
+          <div className="order-2 lg:order-1 relative h-125">
             <div className="absolute inset-0 bg-brand/10 rounded-[3rem] -rotate-3 scale-105" />
             <Image 
               src={urlFor(data.image).url()} 
               fill 
-              className="object-cover rounded-[2.5rem] shadow-2xl relative z-10 border-4 border-background" 
+              className="object-cover rounded-[2.5rem] transition-transform duration-700 group-hover:scale-110" 
               alt="Social Impact"
             />
             <div className="absolute -bottom-6 -left-6 bg-brand text-brand-foreground p-8 rounded-[2rem] shadow-2xl z-20 hidden md:block animate-bounce-slow">
@@ -174,7 +305,7 @@ export default function Hero({ data }: { data: Entreprise }) {
   // --- DESIGN 3 : COOPERATIVE (Asymétrique, Organique, Artisanal) ---
   if (type === 'cooperative') {
     return (
-      <section className="relative mt-20 py-22 min-h-[90vh] flex items-center bg-background  lg:py-0 overflow-hidden font-inter transition-colors duration-300">
+      <section className="relative mt-20 py-22 min-h-screen flex items-center bg-background  lg:py-0 overflow-hidden font-inter transition-colors duration-300">
         {/* Décoration organique en fond utilisant la couleur accent */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-accent/30 rounded-l-[100px] -mr-20 hidden lg:block -z-10" />
         
@@ -195,7 +326,7 @@ export default function Hero({ data }: { data: Entreprise }) {
             <span className="flex items-center gap-3 text-amber-600 dark:text-amber-500 font-black mb-6 uppercase tracking-widest text-sm font-geist">
               <Sprout className="w-6 h-6" /> Force Collective
             </span>
-            <h1 className="text-5xl md:text-6xl font-black text-foreground mb-8 font-geist leading-[0.9]">
+            <h1 className="text-5xl md:text-5xl font-black text-foreground mb-8 font-geist leading-[0.9]">
               {data.nom}
             </h1>
             <div className="relative mb-12">

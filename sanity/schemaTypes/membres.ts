@@ -1,6 +1,7 @@
 import { UsersIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
+
 export const membreType = defineType({
   name: 'membre',
   title: 'Équipe Globale',
@@ -16,7 +17,7 @@ export const membreType = defineType({
     defineField({
       name: 'role',
       title: 'Rôle Principal',
-      type: 'string',
+      type: 'localeString',
       description: 'Ex: Directeur Technique, Responsable Opérations...',
       validation: (Rule) => Rule.required(),
     }),
@@ -29,9 +30,8 @@ export const membreType = defineType({
     defineField({
       name: 'description',
       title: 'Biographie courte',
-      type: 'text',
-      rows: 3,
-    }),
+      type: 'localeText',
+      description: 'Une courte présentation de la personne (ex: 2-3 phrases).',}),
     defineField({
       name: 'linkedin',
       title: 'Lien LinkedIn',

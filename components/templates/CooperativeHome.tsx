@@ -14,7 +14,7 @@ export default function CooperativeHome({ data }: { data: any }) {
         {/* 2. NOTRE MODÈLE : Focus sur le collectif */}
         <section className="py-24">
           <div className="container mx-auto px-4">
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-4xl mx-auto mb-16">
               {/* Utilisation d'un ambre qui s'adapte au mode sombre via l'opacité */}
               <span className="text-amber-600 dark:text-amber-500 font-bold tracking-widest uppercase text-xs font-geist">
                 Solidarité & Terroir

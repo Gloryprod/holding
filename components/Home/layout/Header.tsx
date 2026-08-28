@@ -1,5 +1,6 @@
 'use client';
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LangageSwitcher";
 import  Link  from "next/link";
 import Image from "next/image";
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet';
@@ -7,6 +8,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
+
 
   interface Entreprise {
     nom: string;
@@ -88,6 +90,8 @@ import { urlFor } from "@/sanity/lib/image";
           </Link>
 
           <ThemeToggle />
+
+          <LanguageSwitcher />
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="lg:hidden">
