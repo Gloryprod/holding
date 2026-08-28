@@ -14,9 +14,7 @@ export async function POST(req: NextRequest) {
     // Appel groupé à DeepL
     const results = await translator.translateText(items, 'fr', 'en-US')
     
-    const translations = Array.isArray(results) 
-      ? results.map((r) => r.text) 
-      : [results.text]
+    const translations = results.map((r) => r.text)
 
     return NextResponse.json({ translations })
   } catch (error) {
