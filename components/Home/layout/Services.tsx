@@ -1,51 +1,126 @@
+// import * as Icons from "lucide-react";
+
+// interface Entreprise {
+//   nom: string;
+//   tagline: string;
+//   description: string;
+//   iconName: string;
+//   slug: { current: string };
+//   image: string; // On suppose que l'image est gérée à part ou via un champ supplémentaire
+//   mission: string;
+//   adresse: string;
+//   telephone: string;
+//   email: string;
+//   services: {
+//     titre: string;
+//     description: string;
+//   }[]
+
+// }
+
+
+// export default function Services({data}: {data: Entreprise}) {
+//   return (
+//     <section id="news" className="py-12 bg-muted/20">
+//       <div className="max-w-7xl mx-auto px-6">
+
+//         {/* Grille de projets */}
+//         <div className="lg:col-span-5 space-y-8">
+//             <h3 className="text-2xl font-heading font-bold flex items-center gap-3">
+//             <Icons.Layers className="text-brand" /> Services
+//             </h3>
+//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+//             {data.services?.map((service: { titre: string; description: string }, i: number) => (
+//                 <div key={i} className="group p-6 bg-background rounded-3xl border border-border hover:border-brand/50 hover:shadow-xl hover:shadow-brand/5 transition-all duration-300">
+//                 <div className="flex items-start gap-4">
+//                     <div className="mt-1 shrink-0 w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand font-bold text-xs">
+//                     0{i + 1}
+//                     </div>
+//                     <div>
+//                     <h4 className="font-bold text-foreground mb-2 group-hover:text-brand transition-colors">{service.titre}</h4>
+//                     <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+//                     </div>
+//                 </div>
+//                 </div>
+//             ))}
+//             </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+'use client';
+
 import * as Icons from "lucide-react";
 
-interface Entreprise {
-  nom: string;
-  tagline: string;
-  description: string;
-  iconName: string;
-  slug: { current: string };
-  image: string; // On suppose que l'image est gérée à part ou via un champ supplémentaire
-  mission: string;
-  adresse: string;
-  telephone: string;
-  email: string;
-  services: {
-    titre: string;
-    description: string;
-  }[]
+// Context d'Internationalisation et utilitaire
+import { useLanguage } from "@/context/LanguageContext";
+import { getLocale } from "@/lib/getLocal";
 
+type LocalizedString = string | { fr?: string; en?: string };
+
+interface Entreprise {
+  nom: LocalizedString;
+  tagline?: LocalizedString;
+  description: LocalizedString;
+  iconName?: string;
+  slug?: { current: string } | string;
+  image: string;
+  mission: LocalizedString;
+  adresse?: LocalizedString;
+  telephone?: string;
+  email?: string;
+  services?: {
+    titre: LocalizedString;
+    description: LocalizedString;
+  }[];
 }
 
+export default function Services({ data }: { data: Entreprise }) {
+  const { language } = useLanguage();
 
-export default function Services({data}: {data: Entreprise}) {
   return (
-    <section id="news" className="py-12 bg-muted/20">
+    <section id="services" className="py-12 bg-muted/20">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Grille de projets */}
-        <div className="lg:col-span-5 space-y-8">
-            <h3 className="text-2xl font-heading font-bold flex items-center gap-3">
-            <Icons.Layers className="text-brand" /> Services
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data.services?.map((service: { titre: string; description: string }, i: number) => (
-                <div key={i} className="group p-6 bg-background rounded-3xl border border-border hover:border-brand/50 hover:shadow-xl hover:shadow-brand/5 transition-all duration-300">
-                <div className="flex items-start gap-4">
+        {/* Grille de services */}
+        <div className="space-y-8">
+          <h3 className="text-2xl font-heading font-bold flex items-center gap-3">
+            <Icons.Layers className="text-brand" />
+            {language === 'fr' ? 'Nos Services' : 'Our Services'}
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {data?.services?.map((service, i: number) => {
+              const titre = getLocale(service.titre, language);
+              const description = getLocale(service.description, language);
+
+              return (
+                <div 
+                  key={i} 
+                  className="group p-6 bg-background rounded-3xl border border-border hover:border-brand/50 hover:shadow-xl hover:shadow-brand/5 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
                     <div className="mt-1 shrink-0 w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand font-bold text-xs">
-                    0{i + 1}
+                      0{i + 1}
                     </div>
                     <div>
-                    <h4 className="font-bold text-foreground mb-2 group-hover:text-brand transition-colors">{service.titre}</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+                      <h4 className="font-bold text-foreground mb-2 group-hover:text-brand transition-colors">
+                        {titre}
+                      </h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {description}
+                      </p>
                     </div>
+                  </div>
                 </div>
-                </div>
-            ))}
-            </div>
+              );
+            })}
+          </div>
         </div>
+
       </div>
     </section>
   );
-}
+} 

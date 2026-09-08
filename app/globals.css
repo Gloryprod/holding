@@ -33,11 +33,11 @@
   --foreground: oklch(0.12 0.01 160);
 
   /* TON VERT BRAND : Un émeraude lumineux */
-  --brand: oklch(0.70 0.22 160);
+  --brand: oklch(0.70 0.22 150);
   --brand-foreground: oklch(0.98 0.01 160);
 
   /* Pour Shadcn UI, on aligne Primary sur ton Vert */
-  --primary: oklch(0.65 0.22 160);
+  --primary: oklch(0.65 0.22 150);
   --primary-foreground: oklch(0.98 0.01 160);
 
   --muted: oklch(0.96 0.01 160);

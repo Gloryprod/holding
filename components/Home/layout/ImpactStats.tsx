@@ -1,46 +1,65 @@
 "use client";
+
 import { motion } from "framer-motion";
 import { CheckCircle2, Users, Calendar, Trophy } from "lucide-react";
-
-const stats = [
-  {
-    label: "Projets réalisés",
-    value: "150",
-    suffix: "+",
-    icon: <CheckCircle2 className="w-5 h-5 text-brand" />,
-  },
-  {
-    label: "Bénéficiaires & Clients",
-    value: "12",
-    suffix: "k",
-    icon: <Users className="w-5 h-5 text-brand" />,
-  },
-  {
-    label: "Années d'expérience",
-    value: "25",
-    suffix: "",
-    icon: <Calendar className="w-5 h-5 text-brand" />,
-  },
-  {
-    label: "Partenaires mondiaux",
-    value: "40",
-    suffix: "+",
-    icon: <Trophy className="w-5 h-5 text-brand" />,
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ImpactStats() {
+  const { language } = useLanguage();
+
+  const stats = [
+    {
+      label: {
+        fr: "Projets réalisés",
+        en: "Completed Projects",
+      },
+      value: "150",
+      suffix: "+",
+      icon: <CheckCircle2 className="w-5 h-5 text-brand" />,
+    },
+    {
+      label: {
+        fr: "Bénéficiaires & Clients",
+        en: "Beneficiaries & Clients",
+      },
+      value: "12",
+      suffix: "k",
+      icon: <Users className="w-5 h-5 text-brand" />,
+    },
+    {
+      label: {
+        fr: "Années d'expérience",
+        en: "Years of Experience",
+      },
+      value: "25",
+      suffix: "",
+      icon: <Calendar className="w-5 h-5 text-brand" />,
+    },
+    {
+      label: {
+        fr: "Partenaires mondiaux",
+        en: "Global Partners",
+      },
+      value: "40",
+      suffix: "+",
+      icon: <Trophy className="w-5 h-5 text-brand" />,
+    },
+  ];
+
   return (
     <section className="py-12 bg-muted/30">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 flex flex-col items-center text-center">
           <h2 className="text-sm font-bold text-brand uppercase tracking-widest mb-3">
-            Notre Impact en Chiffres
+            {language === 'fr' ? 'Notre Impact en Chiffres' : 'Our Impact in Numbers'}
           </h2>
-            <p className="text-3xl md:text-4xl font-heading font-bold text-foreground max-w-2xl">
-              Des résultats concrets qui parlent d&apos;eux-mêmes
-            </p>
-          </div>
+          <p className="text-3xl md:text-4xl font-heading font-bold text-foreground max-w-2xl">
+            {language === 'fr' 
+              ? "Des résultats concrets qui parlent d'eux-mêmes" 
+              : "Concrete results that speak for themselves"}
+          </p>
+        </div>
+
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
@@ -64,7 +83,7 @@ export default function ImpactStats() {
 
               {/* Label */}
               <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
-                {stat.label}
+                {stat.label[language]}
               </p>
             </motion.div>
           ))}
