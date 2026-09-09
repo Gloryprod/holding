@@ -6,6 +6,8 @@ import Team from '@/components/Home/layout/Team';
 import Services from '@/components/Home/layout/Services';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Variants } from 'framer-motion';
 
 // Context d'Internationalisation et utilitaire
 import { useLanguage } from "@/context/LanguageContext";
@@ -13,15 +15,28 @@ import { getLocale } from "@/lib/getLocal";
 
 type LocalizedString = string | { fr?: string; en?: string };
 
-interface SocialHomeProps {
-  data: {
-    description?: LocalizedString;
-    mission?: LocalizedString;
-    [key: string]: any;
-  };
-}
+// Variants pour conteneurs à enfants séquentiels
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
 
-export default function SocialHome({ data }: {data: any}) {
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+export default function SocialHome({ data }: { data: any }) {
   const { language } = useLanguage();
 
   // Extraction dynamique des données multilingues reçues du CMS
@@ -56,19 +71,50 @@ export default function SocialHome({ data }: {data: any}) {
   ];
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground font-inter transition-colors duration-300">
-      <main>
+    <div className="relative min-h-screen bg-background text-foreground font-inter transition-colors duration-300 overflow-x-hidden">
+      
+      {/* ================= BACKGROUND DECORATIONS (EFFETS DE COULEURS & GLOW) ================= */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        
+        {/* 1. Grille subtile en fond (Grid Pattern) */}
+        <div 
+          className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:36px_36px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" 
+        />
+
+        {/* 2. Halo lumineux haut-droit (Hero / Notre Mission) */}
+        <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-brand/20 rounded-full blur-[120px] opacity-60" />
+
+        {/* 3. Halo latéral gauche (Notre Mission / Services) */}
+        <div className="absolute top-[20%] -left-32 w-[550px] h-[550px] bg-brand/15 rounded-full blur-[140px] opacity-50" />
+
+        {/* 4. Halo central doux (Chiffres & Axes d'intervention) */}
+        <div className="absolute top-[50%] left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-brand/10 rounded-full blur-[160px] opacity-40" />
+
+        {/* 5. Glow bas de page (Équipe & Call to Action) */}
+        <div className="absolute -bottom-32 -left-20 w-[600px] h-[600px] bg-brand/15 rounded-full blur-[150px] opacity-50" />
+      </div>
+
+      {/* ================= CONTENU PRINCIPAL ================= */}
+      <main className="relative z-10">
         {/* 1. HERO */}
         <Hero data={data} />
 
         {/* 2. NOTRE MISSION */}
-        <section className="py-20">
+        <section className="py-20 relative">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col lg:flex-row items-center gap-16">
-              <div className="lg:w-1/2">
-                <div className="inline-block px-4 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-bold uppercase tracking-wider mb-6 font-geist">
+              
+              {/* Texte Mission */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6 }}
+                className="lg:w-1/2"
+              >
+                <span className="inline-block px-4 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-bold uppercase tracking-wider mb-6 font-geist">
                   {language === 'fr' ? 'Notre Impact Social' : 'Our Social Impact'}
-                </div>
+                </span>
 
                 <h2 className="text-3xl md:text-5xl font-black mb-8 leading-tight font-geist text-foreground">
                   {language === 'fr' ? (
@@ -90,8 +136,11 @@ export default function SocialHome({ data }: {data: any}) {
                 </p>
 
                 <div className="space-y-5">
-                  <div className="flex gap-5 p-6 bg-muted/30 rounded-2xl border border-border hover:border-brand/40 transition-all group">
-                    <div className="shrink-0 w-14 h-14 rounded-xl bg-brand/10 flex items-center justify-center text-brand group-hover:scale-110 transition-transform">
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    className="flex gap-5 p-6 bg-background/80 backdrop-blur-md rounded-2xl border border-border hover:border-brand/40 transition-all group shadow-sm hover:shadow-md"
+                  >
+                    <div className="shrink-0 w-14 h-14 rounded-xl bg-brand/10 flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-white transition-colors duration-300">
                       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path
                           strokeLinecap="round"
@@ -112,60 +161,84 @@ export default function SocialHome({ data }: {data: any}) {
                             : 'Placing humans at the heart of every technological and social decision.')}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Image d'impact */}
-              <div className="lg:w-1/2 relative">
-                <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-muted/50">
+              {/* Image d'impact animée */}
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6 }}
+                className="lg:w-1/2 relative"
+              >
+                <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-muted/50 group">
                   <Image
                     src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=800"
                     alt="Impact Social"
                     width={800}
                     height={600}
-                    className="w-full h-125 object-cover"
+                    className="w-full h-125 object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
 
-                <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand/10 rounded-full blur-3xl -z-10"></div>
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand/20 rounded-full blur-3xl -z-10"></div>
-              </div>
+                <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand/20 rounded-full blur-3xl -z-10 animate-pulse" />
+                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand/30 rounded-full blur-3xl -z-10 animate-pulse" />
+              </motion.div>
             </div>
           </div>
         </section>
 
+        {/* SERVICES */}
         <Services data={data} />
 
         {/* 3. LES CHIFFRES */}
         <ImpactStats />
 
         {/* 4. NOS AXES D'INTERVENTION */}
-        <section className="py-24 bg-muted/20">
+        <section className="py-24 bg-muted/30 backdrop-blur-sm relative">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-black mb-16 font-geist text-foreground">
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-3xl md:text-4xl font-black mb-16 font-geist text-foreground"
+            >
               {language === 'fr' ? "Nos Axes d'Intervention" : 'Our Areas of Focus'}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            </motion.h2>
+
+            <motion.div 
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-10"
+            >
               {axesIntervention.map((item, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="p-10 rounded-[2rem] border border-border bg-background hover:shadow-2xl hover:border-brand/30 hover:-translate-y-2 transition-all duration-300 group"
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="p-10 rounded-[2rem] border border-border bg-background/80 backdrop-blur-md shadow-sm hover:shadow-2xl hover:border-brand/30 transition-all duration-300 group flex flex-col items-center"
                 >
-                  <div className="w-20 h-20 bg-muted rounded-[1.5rem] flex items-center justify-center mx-auto mb-8 group-hover:bg-brand group-hover:text-brand-foreground transition-all duration-300">
-                    <span className="text-3xl group-hover:scale-110 transition-transform">
+                  <div className="w-20 h-20 bg-muted/60 rounded-[1.5rem] flex items-center justify-center mb-8 group-hover:bg-brand group-hover:text-brand-foreground transition-colors duration-300 shadow-sm">
+                    <span className="text-3xl group-hover:scale-110 transition-transform duration-300">
                       {item.icon}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 font-geist text-foreground">
+                  <h3 className="text-2xl font-bold mb-4 font-geist text-foreground group-hover:text-brand transition-colors">
                     {item.title[language]}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
                     {item.desc[language]}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -175,10 +248,16 @@ export default function SocialHome({ data }: {data: any}) {
         {/* 6. CALL TO ACTION */}
         <section className="py-20 mb-20">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="bg-brand rounded-[3rem] p-12 md:p-20 text-center text-brand-foreground relative overflow-hidden shadow-2xl shadow-brand/20 transition-all duration-500">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl"></div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="bg-brand rounded-[3rem] p-12 md:p-20 text-center text-brand-foreground relative overflow-hidden shadow-2xl shadow-brand/20"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
 
-              <h2 className="text-3xl md:text-5xl font-black mb-8 font-geist relative z-10">
+              <h2 className="text-3xl md:text-5xl font-black mb-8 font-geist relative z-10 leading-tight">
                 {language === 'fr'
                   ? 'Envie de contribuer à notre mission ?'
                   : 'Want to contribute to our mission?'}
@@ -191,18 +270,26 @@ export default function SocialHome({ data }: {data: any}) {
 
               <div className="flex flex-wrap justify-center gap-6 relative z-10">
                 <Link href="/contact" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto cursor-pointer px-10 py-5 bg-brand-foreground text-brand font-black rounded-2xl hover:opacity-90 transition-all font-geist uppercase tracking-tight shadow-xl">
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto cursor-pointer px-10 py-5 bg-brand-foreground text-brand font-black rounded-2xl hover:opacity-90 transition-all font-geist uppercase tracking-tight shadow-xl"
+                  >
                     {language === 'fr' ? 'Nous Contacter' : 'Contact Us'}
-                  </button>
+                  </motion.button>
                 </Link>
 
                 <Link href="/about" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto cursor-pointer px-10 py-5 bg-transparent border-2 border-brand-foreground/40 text-brand-foreground font-bold rounded-2xl hover:bg-brand-foreground/10 hover:border-brand-foreground transition-all font-geist uppercase tracking-tight">
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto cursor-pointer px-10 py-5 bg-transparent border-2 border-brand-foreground/40 text-brand-foreground font-bold rounded-2xl hover:bg-brand-foreground/10 hover:border-brand-foreground transition-all font-geist uppercase tracking-tight"
+                  >
                     {language === 'fr' ? 'En savoir plus' : 'Learn More'}
-                  </button>
+                  </motion.button>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>

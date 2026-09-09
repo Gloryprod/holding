@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FacebookIcon, LinkedinIcon } from "./Team";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { motion } from "framer-motion";
 
 // Context d'Internationalisation et utilitaires
 import { useLanguage } from "@/context/LanguageContext";
@@ -74,24 +75,48 @@ export default function Footer({ data }: { data: Entreprise }) {
         {/* 1. Section Partenaires / Logos (Affichée uniquement s'il y a au moins 1 partenaire) */}
         {partenaires.length > 0 && (
           <div className="mb-20">
-            <p className="text-center text-sm font-bold text-muted-foreground uppercase tracking-[0.2em] mb-10">
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center text-sm font-bold text-muted-foreground uppercase tracking-[0.2em] mb-10"
+            >
               {language === 'fr' ? 'Ils nous font confiance' : 'They trust us'}
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-75 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-500">
+            </motion.p>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.15 }
+                }
+              }}
+              className="flex flex-wrap justify-center items-center gap-8 md:gap-12"
+            >
               {partenaires.map((partenaire, index) => (
-                <div 
-                  key={index} 
-                  className="relative h-20 w-50 md:w-40 flex items-center justify-center p-2"
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                  }}
+                  whileHover={{ scale: 1.08 }}
+                  className="relative h-20 w-40 flex items-center justify-center p-2 opacity-75 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"
                 >
                   <Image
                     src={partenaire.logoUrl}
                     alt={partenaire.nom}
                     fill
-                    className="object-contain dark:brightness-0 dark:invert transition-all"
+                    className="object-contain dark:brightness-0 dark:invert"
                   />
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         )}
 

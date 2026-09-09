@@ -15,6 +15,8 @@ import {
 import { getLocale } from "@/lib/getLocal";
 import { useLanguage } from "@/context/LanguageContext";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { Variants } from "framer-motion";
 
 type LocalizedString = string | { fr?: string; en?: string };
 
@@ -26,6 +28,27 @@ interface Entreprise {
   image: string;
   typeEntite: 'business' | 'social' | 'cooperative';
 }
+
+// Variants Framer Motion pour les séquences d'animation
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 const getPartnershipReasons = (type: string, nom: string, lang: string) => {
   const isFr = lang === 'fr';
@@ -180,25 +203,39 @@ export default function PartnershipsView({ data }: { data: Entreprise | null }) 
   ];
 
   return (
-    <div className="bg-background">
+    <div className="bg-background overflow-hidden">
       {/* 1. ACCROCHE */}
       <section className="py-24 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row gap-12 items-center">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="flex flex-col lg:flex-row gap-12 items-center"
+          >
             <div className="lg:w-2/3 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-bold uppercase tracking-[0.2em]">
+              <motion.div 
+                variants={itemVariants}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-bold uppercase tracking-[0.2em]"
+              >
                 <Handshake size={14} /> {current.badge}
-              </div>
-              <h2 className="text-4xl md:text-5xl font-heading font-black text-foreground leading-tight">
+              </motion.div>
+              <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-heading font-black text-foreground leading-tight">
                 {current.title} <br />
                 <span className="text-brand">{current.highlight}</span>
-              </h2>
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              </motion.h2>
+              <motion.p variants={itemVariants} className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
                 {current.desc}
-              </p>
+              </motion.p>
             </div>
             
-            <div className="lg:w-1/3 p-8 bg-muted/50 rounded-3xl border border-border">
+            <motion.div 
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="lg:w-1/3 p-8 bg-muted/50 rounded-3xl border border-border shadow-sm"
+            >
               <p className="text-sm font-medium italic text-foreground leading-relaxed">
                 {isFr 
                   ? '" Bâtir des relations de confiance à long terme est la clé de voûte de notre efficacité et de notre réussite sur le terrain. "'
@@ -207,15 +244,21 @@ export default function PartnershipsView({ data }: { data: Entreprise | null }) 
               <p className="mt-4 text-xs font-bold uppercase text-brand">
                 — {isFr ? "Direction" : "Leadership"} {nom}
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* 2. ARGUMENTS */}
       <section className="py-20 bg-muted/20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            className="mb-16"
+          >
             <h3 className="text-3xl font-heading font-bold mb-4">
               {isFr ? `Pourquoi s'associer à ${nom} ?` : `Why partner with ${nom}?`}
             </h3>
@@ -224,26 +267,44 @@ export default function PartnershipsView({ data }: { data: Entreprise | null }) 
                 ? "Les piliers fondamentaux qui font de notre structure un partenaire de choix."
                 : "The fundamental pillars that make our organization a partner of choice."}
             </p>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
             {partnershipReasons.map((arg, i) => (
-              <div key={i} className="group p-8 bg-background rounded-3xl border border-border hover:border-brand/50 transition-all duration-300">
+              <motion.div 
+                key={i} 
+                variants={itemVariants}
+                whileHover={{ y: -6, borderColor: "rgba(var(--brand-rgb), 0.4)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="group p-8 bg-background rounded-3xl border border-border transition-colors duration-300 shadow-sm"
+              >
                 <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-brand/10 text-brand mb-6 group-hover:scale-110 transition-transform">
                   {arg.icon}
                 </div>
                 <h4 className="font-bold text-lg mb-3 text-foreground">{arg.title}</h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">{arg.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 3. DOCUMENTS */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-brand rounded-[2.5rem] p-8 md:p-16 text-brand-foreground relative overflow-hidden shadow-2xl shadow-brand/20">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-brand rounded-[2.5rem] p-8 md:p-16 text-brand-foreground relative overflow-hidden shadow-2xl shadow-brand/20"
+          >
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h3 className="text-3xl md:text-4xl font-heading font-bold mb-6 whitespace-pre-line">
@@ -254,17 +315,30 @@ export default function PartnershipsView({ data }: { data: Entreprise | null }) 
                 </p>
 
                 <Link href="/contact">
-                  <button className="cursor-pointer inline-flex items-center gap-3 bg-white text-brand px-8 py-4 rounded-xl font-bold hover:shadow-lg hover:-translate-y-1 transition-all">
+                  <motion.button 
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="cursor-pointer inline-flex items-center gap-3 bg-white text-brand px-8 py-4 rounded-xl font-bold hover:shadow-lg transition-all"
+                  >
                     {isFr ? "Devenir Partenaire" : "Become a Partner"} <ArrowRight size={18} />
-                  </button>
+                  </motion.button>
                 </Link>
               </div>
 
-              <div className="space-y-3">
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="space-y-3"
+              >
                 {resourceDocs.map((doc, i) => (
-                  <div 
+                  <motion.div 
                     key={i} 
-                    className="flex items-center justify-between p-5 bg-white/10 rounded-2xl border border-white/10 hover:bg-white/20 transition-all group cursor-pointer"
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.18)" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex items-center justify-between p-5 bg-white/10 rounded-2xl border border-white/10 transition-all group cursor-pointer"
                   >
                     <div className="flex items-center gap-4">
                       <div className="p-3 bg-white/10 rounded-xl">
@@ -275,17 +349,20 @@ export default function PartnershipsView({ data }: { data: Entreprise | null }) 
                         <p className="text-xs text-white/60">{doc.type} • {doc.size}</p>
                       </div>
                     </div>
-                    <div className="p-2 rounded-lg bg-white/0 group-hover:bg-white/20 transition-all">
+                    <motion.div 
+                      whileHover={{ scale: 1.1 }}
+                      className="p-2 rounded-lg bg-white/0 group-hover:bg-white/20 transition-all"
+                    >
                       <Download size={20} className="text-white" />
-                    </div>
-                  </div>
+                    </motion.div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
             <div className="absolute -top-24 -left-24 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
             <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
