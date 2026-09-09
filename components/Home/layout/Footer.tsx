@@ -28,7 +28,7 @@ const PARTENAIRES_PAR_ENTREPRISE: EntreprisePartenaires[] = [
   {
     nomEntreprise: "KODANU",
     partenaires: [
-      { nom: "Sèmè City", logoUrl: "/sc-logo.png" },
+      { nom: "Sèmè City", logoUrl: "/sc-logo-horizontal.svg" },
     ],
   },
 ];
@@ -72,7 +72,7 @@ export default function Footer({ data }: { data: Entreprise }) {
     <footer className="bg-background pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* 1. Section Partenaires / Logos (Affichée uniquement s'il y a au moins 1 partenaire) */}
+        {/* 1. Section Partenaires / Logos */}
         {partenaires.length > 0 && (
           <div className="mb-20">
             <motion.p
@@ -105,14 +105,14 @@ export default function Footer({ data }: { data: Entreprise }) {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
                   }}
-                  whileHover={{ scale: 1.08 }}
-                  className="relative h-20 w-40 flex items-center justify-center p-2 opacity-75 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  className="relative h-20 w-44 flex items-center justify-center p-3 rounded-xl bg-slate-50/50 dark:bg-white/5 border border-border/40 opacity-80 hover:opacity-100 transition-all duration-300"
                 >
                   <Image
                     src={partenaire.logoUrl}
                     alt={partenaire.nom}
                     fill
-                    className="object-contain dark:brightness-0 dark:invert"
+                    className="object-contain p-2"
                   />
                 </motion.div>
               ))}
@@ -135,7 +135,7 @@ export default function Footer({ data }: { data: Entreprise }) {
                     alt={nom || "Logo"} 
                     width={200}
                     height={60}
-                    className="w-auto h-full object-contain dark:brightness-0 dark:invert"
+                    className="w-auto h-full object-contain"
                     priority
                   />
                 </div>
