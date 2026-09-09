@@ -2,29 +2,23 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/context/LanguageContext";
-import { Geist, Playfair_Display, Geist_Mono, Inter } from 'next/font/google'
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from 'next/font/google'
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/next"
 
-const inter = Inter({ 
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-inter',
-})
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-bricolage',
+  weight: ['600', '700', '800'],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  weight: ['400', '500', '600'],
+  display: 'swap',
 });
-
-export const metadata: Metadata = {
-  title: "Holding",
-  description: "",
-};
 
 export default function RootLayout({
   children,
@@ -34,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${geistMono.variable} ${geistSans.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${jakarta.variable}  h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

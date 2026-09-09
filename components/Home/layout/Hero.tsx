@@ -56,33 +56,58 @@ export default function Hero({ data }: { data: Entreprise }) {
       case 'Benin Bien Etre Services Well Being Business':
       case 'Bénin Bien Etre Service Well Being Business':
         return (
-          <section className="relative min-h-screen flex items-center text-foreground overflow-hidden font-inter py-20 lg:py-0 transition-colors duration-300 mt-16">
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 dark:bg-brand/10 blur-[120px] opacity-70 dark:opacity-100" />
-              <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/5 dark:bg-blue-500/10 blur-[120px] opacity-70 dark:opacity-100" />
+          <section className="relative min-h-screen flex items-center text-foreground overflow-hidden font-inter py-16 lg:py-0 transition-colors duration-300 mt-10 lg:mt-16 bg-background">
+  
+            {/* Modèle d'Arrière-plan : Cyber-Grid & Neon Tech Glow */}
+            <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+              {/* Lumière diffuse supérieure centrée */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[350px] bg-gradient-to-b from-brand/15 via-blue-500/10 to-transparent blur-[120px] opacity-80" />
+
+              {/* Halo lumineux d'angle (Bleu & Brand) */}
+              <div className="absolute top-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-brand/15 blur-[130px] animate-pulse duration-[8000ms]" />
+              <div className="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-blue-500/15 blur-[140px] animate-pulse duration-[6000ms]" />
+
+              {/* Motifs Cyber Grid Tech */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:28px_28px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_40%,#000_70%,transparent_100%)]" />
+
+              {/* Points de données lumineux (Nodes) */}
+              <div className="absolute top-1/3 left-10 w-2 h-2 rounded-full bg-green-400 animate-ping duration-[4000ms]" />
+              <div className="absolute bottom-1/4 right-12 w-2 h-2 rounded-full bg-brand animate-ping duration-[6000ms]" />
             </div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                  <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-muted/50 dark:bg-white/5 border border-border dark:border-white/10 text-muted-foreground dark:text-white/80 text-xs font-medium mb-6 backdrop-blur-sm">
-                    <Sparkles className="w-3.5 h-3.5 text-brand" />
+                
+                {/* Colonne Texte - Centrée sur Mobile, Alignée à gauche sur Desktop */}
+                <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left justify-center">
+                  
+                  {/* Badge Pill Header */}
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-muted/60 dark:bg-white/5 border border-border dark:border-white/10 text-muted-foreground dark:text-white/80 text-xs font-medium mb-6 backdrop-blur-md shadow-sm">
+                    <Sparkles className="w-3.5 h-3.5 text-brand shrink-0" />
                     <span className="uppercase tracking-widest text-[10px] font-semibold font-geist">
                       {language === 'fr' ? 'Innovation Digitale' : 'Digital Innovation'}
                     </span>
                   </div>
 
-                  <h1 className="text-4xl sm:text-5xl md:text-5xl font-black text-foreground tracking-tight font-geist leading-[1.1] mb-6">
-                    {nom}
+                  {/* Titre Principal */}
+                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-5xl font-black font-geist tracking-tight leading-[1.08] mb-6">
+                    <span className="text-brand">
+                      Benin Bien Etre Services
+                    </span> <br />
+                    <span>
+                      Well Being Business
+                    </span>
                   </h1>
 
-                  <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed font-light">
+                  {/* Paragraphe Descriptive */}
+                  <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed font-light mx-auto lg:mx-0">
                     {language === 'fr'
                       ? 'Hygiène, recyclage, agrobusiness et hôtellerie : une même ambition, transformer durablement le territoire béninois.'
                       : 'Hygiene, recycling, agrobusiness, and hospitality: a shared ambition to sustainably transform Benin.'}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                  {/* Groupe de Boutons */}
+                  <div className="flex flex-col sm:flex-row gap-4 mb-10 w-full sm:w-auto justify-center lg:justify-start">
                     <Link href="/about" className="w-full sm:w-auto">
                       <button className="cursor-pointer group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-xl font-bold font-geist uppercase tracking-wider text-xs overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--brand-rgb,74,222,128),0.35)] hover:-translate-y-0.5 active:translate-y-0">
                         <span className="relative z-10 flex items-center justify-center gap-2">
@@ -100,48 +125,59 @@ export default function Hero({ data }: { data: Entreprise }) {
                     </Link>
                   </div>
 
-                  <div className="flex items-center gap-8 pt-8 border-t border-border max-w-md">
-                    <div className="flex flex-col">
+                  {/* Section Key Metrics / KPIs */}
+                  <div className="flex items-center justify-center lg:justify-start gap-8 pt-8 border-t border-border w-full max-w-md">
+                    <div className="flex flex-col items-center lg:items-start">
                       <span className="text-2xl font-black text-foreground">100%</span>
                       <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">
                         {language === 'fr' ? 'Digitalisé' : 'Digitalized'}
                       </span>
                     </div>
-                    <div className="h-8 w-px bg-border" />
-                    <div className="flex flex-col">
+                    <div className="h-8 w-px bg-border shrink-0" />
+                    <div className="flex flex-col items-center lg:items-start">
                       <span className="text-2xl font-black text-foreground">B2B</span>
                       <span className="text-[10px] uppercase tracking-widest text-muted-foreground/75 font-bold mt-1">
                         {language === 'fr' ? 'Standard' : 'Standard'}
                       </span>
                     </div>
                   </div>
+
                 </div>
 
-                <div className="lg:col-span-5 relative w-full h-87.5 sm:h-112.5 lg:h-125 flex items-center justify-center">
-                  <div className="absolute inset-0 bg-linear-to-tr from-brand/20 to-blue-500/20 rounded-3xl filter blur-2xl opacity-70 dark:opacity-50 animate-pulse duration-4000" />
+                {/* Colonne Image / Visuel */}
+                <div className="lg:col-span-5 relative w-full h-[320px] sm:h-[450px] lg:h-[500px] flex items-center justify-center">
+                  {/* Glow de la carte */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-brand/20 to-blue-500/20 rounded-3xl filter blur-2xl opacity-70 dark:opacity-50 animate-pulse duration-4000" />
+                  
                   <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-2xl shadow-muted/30 dark:shadow-black/80 group">
                     <Image
                       src={urlFor(data.image).url()}
                       fill
+                      sizes="(max-width: 1024px) 100vw, 40vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       alt={nom}
                       priority
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent opacity-80" />
-                    <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/95 dark:bg-slate-950/85 backdrop-blur-md border border-border dark:border-white/10 flex items-center justify-between">
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-80" />
+                    
+                    {/* Tagline Floating Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/90 dark:bg-slate-950/85 backdrop-blur-md border border-border dark:border-white/10 flex items-center justify-between text-left">
                       <div>
                         <p className="text-[10px] text-brand uppercase font-bold tracking-wider">
                           {language === 'fr' ? 'Devise' : 'Tagline'}
                         </p>
-                        <h4 className="text-sm font-bold text-foreground dark:text-white">{tagline}</h4>
+                        <h4 className="text-xs sm:text-sm font-bold text-foreground dark:text-white mt-0.5 line-clamp-2">
+                          {tagline}
+                        </h4>
                       </div>
-                      <div className="relative flex h-3 w-3">
+                      <div className="relative flex h-3 w-3 shrink-0 ml-3">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                       </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </section>
@@ -255,48 +291,74 @@ export default function Hero({ data }: { data: Entreprise }) {
   // --- DESIGN 2 : SOCIAL ---
   if (type === 'social') {
     return (
-      <section className="relative min-h-screen flex items-center bg-background py-22 lg:py-0 transition-colors duration-300 font-inter mt-20">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
-            <div className="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mb-8">
+      <section className="relative min-h-screen flex items-center bg-background py-16 lg:py-0 transition-colors duration-300 font-inter mt-10 lg:mt-20">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* 1. Gradient de fond général */}
+          <div className="absolute inset-0 bg-gradient-to-b from-brand/5 via-transparent to-background opacity-90" />
+
+          {/* 2. Orbes lumineux animés */}
+          <div className="absolute top-1/4 left-10 w-72 h-72 bg-brand/20 rounded-full blur-[100px] animate-pulse" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500/15 rounded-full blur-[120px] animate-pulse [animation-delay:2s]" />
+
+          {/* 3. Motifs de grille technique */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
+          
+          {/* Bloc Texte - Centré sur mobile (order-1), aligné à gauche sur desktop (lg:order-1) */}
+          <div className="order-1 flex flex-col items-center text-center lg:items-start lg:text-left">
+            
+            {/* Icône */}
+            <div className="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center mb-6 lg:mb-8 shrink-0">
               <Heart className="w-8 h-8 text-brand fill-brand/20" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-black text-foreground mb-6 leading-[1.1] font-geist">
+
+            {/* Titre principal */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl font-black font-geist tracking-tight leading-[1.05] mb-6">
               <span>{nom} :</span> <br />
               <span className="text-brand">
                 {language === 'fr' ? 'Agir' : 'Act'}
               </span>{' '}
               {language === 'fr' ? 'pour demain.' : 'for tomorrow.'}
             </h1>
-            <p className="text-lg text-muted-foreground mb-10 max-w-lg leading-relaxed">
+
+            {/* Description */}
+            <p className="text-base sm:text-lg text-muted-foreground mb-8 lg:mb-10 max-w-lg leading-relaxed mx-auto lg:mx-0">
               {tagline || (language === 'fr' 
                 ? 'Des solutions innovantes face aux défis environnementaux et climatiques, au plus près des communautés béninoises.'
                 : 'Innovative solutions facing environmental and climate challenges, right alongside Beninese communities.')}
             </p>
-            <div className="items-center">
-              <Link href="/about">
-                <button className="cursor-pointer bg-brand text-brand-foreground px-10 py-5 rounded-2xl font-black shadow-xl shadow-brand/20 hover:-translate-y-1 transition-all font-geist uppercase tracking-tight">
+
+            {/* Bouton CTA */}
+            <div className="w-full sm:w-auto">
+              <Link href="/about" className="inline-block w-full sm:w-auto">
+                <button className="w-full sm:w-auto cursor-pointer bg-brand text-brand-foreground px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-black shadow-xl shadow-brand/20 hover:-translate-y-1 transition-all font-geist uppercase tracking-tight">
                   {language === 'fr' ? 'Nos Projets' : 'Our Projects'}
                 </button>
               </Link>
             </div>
           </div>
 
-          <div className="order-2 lg:order-1 relative h-125">
-            <div className="absolute inset-0 bg-brand/10 rounded-[3rem] -rotate-3 scale-105" />
+          {/* Bloc Image - Passe sous le texte sur mobile (order-2) */}
+          <div className="order-2 relative h-[320px] sm:h-[420px] lg:h-[500px] w-full">
+            <div className="absolute inset-0 bg-brand/10 rounded-[2.5rem] sm:rounded-[3rem] -rotate-3 scale-105" />
             <Image
               src={urlFor(data.image).url()}
               fill
-              className="object-cover rounded-[2.5rem] transition-transform duration-700 group-hover:scale-110"
+              className="object-cover rounded-[2rem] sm:rounded-[2.5rem] transition-transform duration-700 group-hover:scale-110"
               alt="Social Impact"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute -bottom-6 -left-6 bg-brand text-brand-foreground p-8 rounded-[2rem] shadow-2xl z-20 hidden md:block animate-bounce-slow">
-              <p className="text-3xl font-black font-geist">10k+</p>
-              <p className="text-xs uppercase font-bold opacity-80 tracking-widest font-geist">
+            
+            {/* Badge flottant */}
+            <div className="absolute -bottom-6 -left-6 bg-brand text-brand-foreground p-6 sm:p-8 rounded-[2rem] shadow-2xl z-20 hidden md:block animate-bounce-slow">
+              <p className="text-2xl sm:text-3xl font-black font-geist">10k+</p>
+              <p className="text-[10px] sm:text-xs uppercase font-bold opacity-80 tracking-widest font-geist">
                 {language === 'fr' ? 'Vies impactées' : 'Lives impacted'}
               </p>
             </div>
           </div>
+
         </div>
       </section>
     );
@@ -305,40 +367,67 @@ export default function Hero({ data }: { data: Entreprise }) {
   // --- DESIGN 3 : COOPERATIVE ---
   if (type === 'cooperative') {
     return (
-      <section className="relative mt-20 py-22 min-h-screen flex items-center bg-background lg:py-0 overflow-hidden font-inter transition-colors duration-300">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-accent/30 rounded-l-[100px] -mr-20 hidden lg:block -z-10" />
+      <section className="relative mt-10 lg:mt-20 py-16 lg:py-24 min-h-screen flex items-center bg-background overflow-hidden font-inter transition-colors duration-300">
+  
+        {/* Nouveau Modèle d'Arrière-plan : Aura Lumineuse & Lucioles */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+          {/* Halo principal ambré / vert (Haut Droit) */}
+          <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-gradient-to-br from-amber-500/20 via-brand/15 to-transparent rounded-full blur-[120px] animate-pulse duration-[7000ms]" />
+          
+          {/* Halo secondaire (Bas Gauche) */}
+          <div className="absolute -bottom-20 -left-20 w-[450px] h-[450px] bg-gradient-to-tr from-brand/20 via-emerald-500/15 to-transparent rounded-full blur-[100px] animate-pulse duration-[9000ms]" />
 
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="relative h-130 group order-2 lg:order-1">
-            <div className="absolute inset-0 border-4 border-brand/20 rounded-[3rem] translate-x-6 translate-y-6 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-500" />
-            <div className="relative h-full w-full overflow-hidden rounded-[3rem]">
+          {/* Grille de fond radiale subtile */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)]" />
+
+          {/* Particules "Lucioles" animées */}
+          <div className="absolute top-1/4 left-1/3 w-2 h-2 rounded-full bg-amber-400/60 blur-[1px] animate-ping duration-[3000ms]" />
+          <div className="absolute bottom-1/3 right-1/4 w-2.5 h-2.5 rounded-full bg-brand/60 blur-[1px] animate-ping duration-[5000ms]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10 w-full">
+          
+          {/* Bloc Image (order-2 sur mobile, order-1 sur lg) */}
+          <div className="relative h-[320px] sm:h-[450px] lg:h-[520px] group order-2 lg:order-1 w-full">
+            <div className="absolute inset-0 border-4 border-brand/20 rounded-[2.5rem] sm:rounded-[3rem] translate-x-3 translate-y-3 sm:translate-x-6 sm:translate-y-6 group-hover:translate-x-2 group-hover:translate-y-2 transition-all duration-500" />
+            <div className="relative h-full w-full overflow-hidden rounded-[2.5rem] sm:rounded-[3rem] shadow-2xl">
               <Image
                 src={urlFor(data.image).url()}
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-all duration-700 group-hover:scale-110"
                 alt="Producteurs"
               />
             </div>
           </div>
 
-          <div className="lg:pl-12 order-1 lg:order-2">
-            <span className="flex items-center gap-3 text-amber-600 dark:text-amber-500 font-black mb-6 uppercase tracking-widest text-sm font-geist">
-              <Sprout className="w-6 h-6" /> {language === 'fr' ? 'Force Collective' : 'Collective Force'}
+          {/* Bloc Texte - Centré sur mobile / Aligné à gauche sur desktop */}
+          <div className="lg:pl-8 order-1 lg:order-2 flex flex-col items-center text-center lg:items-start lg:text-left">
+            
+            {/* Badge / Tag */}
+            <span className="flex items-center justify-center lg:justify-start gap-3 text-amber-600 dark:text-amber-500 font-black mb-4 sm:mb-6 uppercase tracking-widest text-xs sm:text-sm font-geist">
+              <Sprout className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" /> 
+              {language === 'fr' ? 'Force Collective' : 'Collective Force'}
             </span>
-            <h1 className="text-5xl md:text-5xl font-black text-foreground mb-8 font-geist leading-[0.9]">
+
+            {/* Titre */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-5xl font-black font-geist tracking-tight leading-[1.1] mb-6">
               {nom}
             </h1>
-            <div className="relative mb-12">
-              <p className="text-2xl text-muted-foreground italic border-l-8 border-brand pl-8 py-2 leading-relaxed">
+
+            {/* Citation - Style bordure adapté au centrage mobile */}
+            <div className="relative mb-8 sm:mb-10 w-full max-w-xl">
+              <p className="text-lg sm:text-2xl text-muted-foreground italic border-y-2 lg:border-y-0 lg:border-l-8 border-brand/80 px-4 py-3 lg:py-2 lg:pl-6 leading-relaxed">
                 &quot;{tagline || (language === 'fr'
                   ? 'Une coopérative de producteurs qui allie innovation et solidarité pour une agriculture qui respecte la terre.'
                   : 'A producer cooperative combining innovation and solidarity for agriculture that respects the land.')}&quot;
               </p>
             </div>
 
-            <div className="flex items-center justify-left text-center gap-6">
-              <Link href="/about">
-                <button className="cursor-pointer bg-brand text-brand-foreground p-6 rounded-2xl font-black flex flex-col items-center group hover:shadow-xl transition-all font-geist uppercase">
+            {/* Bouton CTA */}
+            <div className="w-full sm:w-auto">
+              <Link href="/about" className="inline-block w-full sm:w-auto">
+                <button className="w-full sm:w-auto cursor-pointer bg-brand text-brand-foreground px-8 py-5 rounded-2xl font-black flex flex-col items-center group hover:shadow-xl hover:shadow-brand/20 hover:-translate-y-1 transition-all font-geist uppercase">
                   <span className="text-[10px] opacity-70 tracking-[0.2em] mb-1">
                     {language === 'fr' ? 'Explorer' : 'Explore'}
                   </span>
@@ -346,6 +435,7 @@ export default function Hero({ data }: { data: Entreprise }) {
                 </button>
               </Link>
             </div>
+
           </div>
         </div>
       </section>
@@ -354,370 +444,3 @@ export default function Hero({ data }: { data: Entreprise }) {
 
   return null;
 }
-
-// "use client";
-
-// import { ArrowRight, Sparkles, Heart, Sprout, ImageOff } from "lucide-react";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { urlFor } from "@/sanity/lib/image";
-
-// interface Entreprise {
-//   nom: string;
-//   tagline: string;
-//   description: string;
-//   iconName: string;
-//   slug: string;
-//   image: any; // Type permissif pour éviter les erreurs de typage
-//   typeEntite: 'business' | 'social' | 'cooperative';
-// }
-
-// export default function Hero({ data }: { data: Entreprise }) {
-//   const type = data?.typeEntite || 'business';
-
-//   // Sécurisation de la génération de l'URL d'image Sanity
-//   let imageUrl: string | null = null;
-//   if (data?.image) {
-//     try {
-//       imageUrl = urlFor(data.image).url();
-//     } catch (error) {
-//       console.error("Erreur lors de la génération de l'image Sanity:", error);
-//     }
-//   }
-
-//   // ==========================================
-//   // 1. DESIGN : BUSINESS
-//   // ==========================================
-//   if (type === 'business') {
-//     return (
-//       <section className="relative min-h-[85vh] lg:min-h-screen flex items-center overflow-hidden font-inter mt-16 bg-background transition-colors duration-300">
-        
-//         {/* MOBILE & TABLETTE (< lg) */}
-//         <div className="lg:hidden relative w-full h-full min-h-[85vh] flex items-center px-6 py-12">
-//           {imageUrl && (
-//             <Image 
-//               src={imageUrl} 
-//               fill 
-//               className="object-cover -z-10" 
-//               alt={data?.nom || "Image d'illustration"} 
-//               priority 
-//             />
-//           )}
-//           <div className="absolute inset-0 bg-slate-950/80 -z-10 backdrop-blur-[2px]" />
-
-//           <div className="flex flex-col text-left text-white max-w-xl mx-auto w-full">
-//             <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-medium mb-6">
-//               <Sparkles className="w-3.5 h-3.5 text-brand" />
-//               <span className="uppercase tracking-widest text-[10px] font-semibold font-geist">Innovation Digitale</span>
-//             </div>
-
-//             <h1 className="text-4xl sm:text-5xl font-black text-white tracking-tight font-geist leading-[1.1] mb-6">
-//               <span>Bénin Bien Etre Service</span> <br />
-//               <span className="text-brand">Well Being Business</span>
-//             </h1>
-
-//             <p className="text-base sm:text-lg text-slate-200 mb-8 font-light leading-relaxed">
-//               Hygiène, recyclage, agrobusiness et hôtellerie : une même ambition, transformer durablement le territoire béninois.
-//             </p>
-
-//             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-//               <Link href="/about" className="w-full sm:w-auto">
-//                 <button className="w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-xl font-bold font-geist uppercase tracking-wider text-xs">
-//                   Découvrir nos projets
-//                 </button>
-//               </Link>
-//               <Link href="/contact" className="w-full sm:w-auto">
-//                 <button className="w-full sm:w-auto px-8 py-4 bg-white/10 text-white border border-white/20 rounded-xl font-bold font-geist uppercase tracking-wider text-xs">
-//                   Nous contacter
-//                 </button>
-//               </Link>
-//             </div>
-
-//             <div className="flex items-center gap-8 pt-6 border-t border-white/20">
-//               <div>
-//                 <span className="text-2xl font-black text-white">100%</span>
-//                 <p className="text-[10px] uppercase text-slate-300 font-bold mt-1">Digitalisé</p>
-//               </div>
-//               <div className="h-8 w-px bg-white/20" />
-//               <div>
-//                 <span className="text-2xl font-black text-white">B2B</span>
-//                 <p className="text-[10px] uppercase text-slate-300 font-bold mt-1">Standard</p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* DESKTOP (≥ lg) */}
-//         <div className="hidden lg:block max-w-7xl mx-auto px-6 w-full relative z-10 py-12">
-//           <div className="absolute inset-0 z-0 pointer-events-none">
-//             <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 blur-[120px]" />
-//             <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[120px]" />
-//           </div>
-
-//           <div className="grid grid-cols-12 gap-12 items-center relative z-10">
-//             <div className="col-span-7 flex flex-col justify-center text-left">
-//               <div className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-muted border border-border text-muted-foreground text-xs font-medium mb-6">
-//                 <Sparkles className="w-3.5 h-3.5 text-brand" />
-//                 <span className="uppercase tracking-widest text-[10px] font-semibold font-geist">Innovation Digitale</span>
-//               </div>
-
-//               <h1 className="text-5xl md:text-6xl font-black text-foreground tracking-tight font-geist leading-[1.1] mb-6">
-//                 <span>Bénin Bien Etre Service</span> <br />
-//                 <span className="text-brand">Well Being Business</span>
-//               </h1>
-
-//               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed font-light">
-//                 Hygiène, recyclage, agrobusiness et hôtellerie : une même ambition, transformer durablement le territoire béninois.
-//               </p>
-
-//               <div className="flex gap-4 mb-12">
-//                 <Link href="/about">
-//                   <button className="px-8 py-4 bg-brand text-brand-foreground rounded-xl font-bold font-geist uppercase tracking-wider text-xs shadow-lg shadow-brand/20 hover:scale-105 transition-all">
-//                     Découvrir nos projets <ArrowRight className="inline-block w-4 h-4 ml-2" />
-//                   </button>
-//                 </Link>
-//                 <Link href="/contact">
-//                   <button className="px-8 py-4 bg-muted hover:bg-muted/80 text-foreground border border-border rounded-xl font-bold font-geist uppercase tracking-wider text-xs transition-all">
-//                     Nous contacter
-//                   </button>
-//                 </Link>
-//               </div>
-
-//               <div className="flex items-center gap-8 pt-6 border-t border-border max-w-md">
-//                 <div>
-//                   <span className="text-2xl font-black text-foreground">100%</span>
-//                   <p className="text-[10px] uppercase text-muted-foreground font-bold mt-1">Digitalisé</p>
-//                 </div>
-//                 <div className="h-8 w-px bg-border" />
-//                 <div>
-//                   <span className="text-2xl font-black text-foreground">B2B</span>
-//                   <p className="text-[10px] uppercase text-muted-foreground font-bold mt-1">Standard</p>
-//                 </div>
-//               </div>
-//             </div>
-
-//             {/* Cadre de l'image Desktop */}
-//             <div className="col-span-5 relative w-full h-[480px]">
-//               <div className="relative w-full h-full rounded-2xl overflow-hidden border border-border shadow-2xl group bg-muted/50 flex items-center justify-center">
-//                 {imageUrl ? (
-//                   <Image 
-//                     src={imageUrl} 
-//                     fill 
-//                     className="object-cover transition-transform duration-700 group-hover:scale-105" 
-//                     alt={data?.nom || "Image entreprise"} 
-//                     priority 
-//                   />
-//                 ) : (
-//                   <div className="flex flex-col items-center gap-2 text-muted-foreground">
-//                     <ImageOff className="w-8 h-8 opacity-40" />
-//                     <span className="text-xs">Aucune image dans Sanity</span>
-//                   </div>
-//                 )}
-                
-//                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
-
-//                 {data?.tagline && (
-//                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-background/95 backdrop-blur-md border border-border flex items-center justify-between">
-//                     <div>
-//                       <p className="text-[10px] text-brand uppercase font-bold tracking-wider">Devise</p>
-//                       <h4 className="text-sm font-bold text-foreground">{data.tagline}</h4>
-//                     </div>
-//                     <span className="relative flex h-3 w-3">
-//                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-//                       <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-//                     </span>
-//                   </div>
-//                 )}
-//               </div>
-//             </div>
-
-//           </div>
-//         </div>
-//       </section>
-//     );
-//   }
-
-//   // ==========================================
-//   // 2. DESIGN : SOCIAL
-//   // ==========================================
-//   if (type === 'social') {
-//     return (
-//       <section className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden font-inter mt-16 bg-background transition-colors duration-300">
-        
-//         {/* MOBILE & TABLETTE (< lg) */}
-//         <div className="lg:hidden relative w-full h-full min-h-[85vh] flex items-center px-6 py-12">
-//           {imageUrl && (
-//             <Image 
-//               src={imageUrl} 
-//               fill 
-//               className="object-cover -z-10" 
-//               alt={data?.nom || "Image entreprise"} 
-//             />
-//           )}
-//           <div className="absolute inset-0 bg-slate-950/85 -z-10 backdrop-blur-[2px]" />
-
-//           <div className="flex flex-col text-left text-white max-w-xl mx-auto w-full">
-//             <div className="w-14 h-14 bg-brand/20 rounded-2xl flex items-center justify-center mb-6">
-//               <Heart className="w-7 h-7 text-brand fill-brand/20" />
-//             </div>
-
-//             <h1 className="text-4xl sm:text-5xl font-black text-white mb-6 leading-[1.1] font-geist">
-//               {data?.nom} : <span className="text-brand">Agir</span> pour demain.
-//             </h1>
-
-//             <p className="text-base sm:text-lg text-slate-200 mb-8 leading-relaxed font-light">
-//               Des solutions innovantes face aux défis environnementaux et climatiques, au plus près des communautés béninoises.
-//             </p>
-
-//             <Link href="/about">
-//               <button className="bg-brand text-brand-foreground px-10 py-5 rounded-2xl font-black shadow-xl shadow-brand/20 font-geist uppercase tracking-tight text-xs">
-//                 Nos Projets
-//               </button>
-//             </Link>
-//           </div>
-//         </div>
-
-//         {/* DESKTOP (≥ lg) */}
-//         <div className="hidden lg:block max-w-7xl mx-auto px-6 w-full relative z-10 py-12">
-//           <div className="grid grid-cols-2 gap-16 items-center">
-//             <div className="flex flex-col items-start">
-//               <div className="w-14 h-14 bg-brand/10 rounded-2xl flex items-center justify-center mb-6">
-//                 <Heart className="w-7 h-7 text-brand fill-brand/20" />
-//               </div>
-
-//               <h1 className="text-5xl md:text-6xl font-black text-foreground mb-6 leading-[1.1] font-geist">
-//                 {data?.nom} : <span className="text-brand">Agir</span> pour demain.
-//               </h1>
-
-//               <p className="text-lg text-muted-foreground mb-8 max-w-lg leading-relaxed font-light">
-//                 Des solutions innovantes face aux défis environnementaux et climatiques, au plus près des communautés béninoises.
-//               </p>
-
-//               <Link href="/about">
-//                 <button className="bg-brand text-brand-foreground px-10 py-5 rounded-2xl font-black shadow-xl shadow-brand/20 hover:-translate-y-1 transition-all font-geist uppercase tracking-tight text-xs">
-//                   Nos Projets
-//                 </button>
-//               </Link>
-//             </div>
-
-//             <div className="relative h-[500px] w-full flex items-center justify-center bg-muted/30 rounded-[2.5rem]">
-//               <div className="absolute inset-0 bg-brand/10 rounded-[3rem] -rotate-3 scale-105" />
-//               {imageUrl ? (
-//                 <Image 
-//                   src={imageUrl} 
-//                   fill 
-//                   className="object-cover rounded-[2.5rem] shadow-2xl relative z-10 border-4 border-background" 
-//                   alt={data?.nom || "Image entreprise"}
-//                 />
-//               ) : (
-//                 <div className="relative z-10 flex flex-col items-center gap-2 text-muted-foreground">
-//                   <ImageOff className="w-8 h-8 opacity-40" />
-//                   <span className="text-xs">Aucune image disponible</span>
-//                 </div>
-//               )}
-//               <div className="absolute -bottom-6 -left-6 bg-brand text-brand-foreground p-6 rounded-[2rem] shadow-2xl z-20">
-//                 <p className="text-3xl font-black font-geist">10k+</p>
-//                 <p className="text-xs uppercase font-bold opacity-80 tracking-widest font-geist">Vies impactées</p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     );
-//   }
-
-//   // ==========================================
-//   // 3. DESIGN : COOPERATIVE
-//   // ==========================================
-//   if (type === 'cooperative') {
-//     return (
-//       <section className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden font-inter mt-16 bg-background transition-colors duration-300">
-        
-//         {/* MOBILE & TABLETTE (< lg) */}
-//         <div className="lg:hidden relative w-full h-full min-h-[85vh] flex items-center px-6 py-12">
-//           {imageUrl && (
-//             <Image 
-//               src={imageUrl} 
-//               fill 
-//               className="object-cover -z-10" 
-//               alt={data?.nom || "Image entreprise"} 
-//             />
-//           )}
-//           <div className="absolute inset-0 bg-slate-950/85 -z-10 backdrop-blur-[2px]" />
-
-//           <div className="flex flex-col text-left text-white max-w-xl mx-auto w-full">
-//             <span className="flex items-center gap-2 text-amber-400 font-black mb-4 uppercase tracking-widest text-xs font-geist">
-//               <Sprout className="w-5 h-5" /> Force Collective
-//             </span>
-
-//             <h1 className="text-4xl sm:text-5xl font-black text-white mb-6 font-geist leading-[0.95]">
-//               {data?.nom}
-//             </h1>
-
-//             <div className="relative mb-8">
-//               <p className="text-lg sm:text-xl text-slate-200 italic border-l-4 border-brand pl-4 py-1 leading-relaxed">
-//                 &quot;Une coopérative de producteurs qui allie innovation et solidarité pour une agriculture qui respecte la terre.&quot;
-//               </p>
-//             </div>
-
-//             <Link href="/about">
-//               <button className="bg-brand text-brand-foreground px-8 py-4 rounded-2xl font-black inline-flex flex-col items-center font-geist uppercase text-xs">
-//                 <span className="text-[10px] opacity-70 tracking-[0.2em] mb-0.5">Explorer</span>
-//                 Nos Projets
-//               </button>
-//             </Link>
-//           </div>
-//         </div>
-
-//         {/* DESKTOP (≥ lg) */}
-//         <div className="hidden lg:block max-w-7xl mx-auto px-6 w-full relative z-10 py-12">
-//           <div className="grid grid-cols-2 gap-16 items-center">
-//             <div className="order-2">
-//               <span className="flex items-center gap-2 text-amber-600 dark:text-amber-500 font-black mb-4 uppercase tracking-widest text-sm font-geist">
-//                 <Sprout className="w-5 h-5" /> Force Collective
-//               </span>
-
-//               <h1 className="text-5xl md:text-6xl font-black text-foreground mb-6 font-geist leading-[0.95]">
-//                 {data?.nom}
-//               </h1>
-
-//               <div className="relative mb-10">
-//                 <p className="text-2xl text-muted-foreground italic border-l-8 border-brand pl-6 py-2 leading-relaxed">
-//                   &quot;Une coopérative de producteurs qui allie innovation et solidarité pour une agriculture qui respecte la terre.&quot;
-//                 </p>
-//               </div>
-
-//               <Link href="/about">
-//                 <button className="bg-brand text-brand-foreground px-8 py-5 rounded-2xl font-black inline-flex flex-col items-center group hover:shadow-xl transition-all font-geist uppercase">
-//                   <span className="text-[10px] opacity-70 tracking-[0.2em] mb-0.5">Explorer</span>
-//                   Nos Projets
-//                 </button>
-//               </Link>
-//             </div>
-
-//             <div className="order-1 relative h-[500px] w-full group flex items-center justify-center">
-//               <div className="absolute inset-0 border-4 border-brand/20 rounded-[3rem] translate-x-6 translate-y-6 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-500" />
-//               <div className="relative h-full w-full overflow-hidden rounded-[3rem] bg-muted/50 flex items-center justify-center">
-//                 {imageUrl ? (
-//                   <Image 
-//                     src={imageUrl} 
-//                     fill 
-//                     className="object-cover transition-all duration-700 group-hover:scale-110" 
-//                     alt={data?.nom || "Image entreprise"}
-//                   />
-//                 ) : (
-//                   <div className="flex flex-col items-center gap-2 text-muted-foreground">
-//                     <ImageOff className="w-8 h-8 opacity-40" />
-//                     <span className="text-xs">Aucune image disponible</span>
-//                   </div>
-//                 )}
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     );
-//   }
-
-//   return null;
-// }
