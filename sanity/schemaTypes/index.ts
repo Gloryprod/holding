@@ -4,6 +4,7 @@ import { entrepriseType } from './entreprises'
 import { projetType } from './projets'
 import { localeString } from './objects/localString'
 import { localeText } from './objects/localText'
+import { localeBlockContent } from './objects/localeBlockContent'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -13,5 +14,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     localeString,
     localeText,
+    localeBlockContent,
   ],
 }
