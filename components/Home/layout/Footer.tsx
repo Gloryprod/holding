@@ -212,7 +212,7 @@ export default function Footer({ data }: { data: Entreprise }) {
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-brand shrink-0" />
-                <span>{data?.email || "contact@obedgroup.com"}</span>
+                <span>{data?.email || "contact@horyzion.com"}</span>
               </li>
             </ul>
           </div>

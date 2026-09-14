@@ -34,7 +34,7 @@ export default async function BusinessHomePage({ data }: { data: any }) {
         <Hero data={data} /> 
         <Entities data={data} />
         <Services data={data} />
-        <ImpactStats />
+        <ImpactStats data={data} />
         <Team />            
       </main>
     </div>

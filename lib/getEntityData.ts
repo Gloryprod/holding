@@ -20,6 +20,10 @@ export async function getEntityData(subdomain: string) {
     "image": imageCover.asset->url,
     "slug": slug.current,
     typeEntite,
+    nombre_projets,
+    nombre_beneficiaires,
+    nombre_annees_experience,
+    nombre_partenaires,
     "projets": *[_type == "projet" && references(^._id)] | order(_createdAt desc) {
       titre,
       statut,

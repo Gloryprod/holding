@@ -274,6 +274,26 @@ export const entrepriseType = defineType({
       },
     }),
     defineField({
+      name: 'nombre_projets',
+      title: 'Nombre de projets',
+      type: 'number',
+    }),
+    defineField({
+      name: 'nombre_beneficiaires',
+      title: 'Nombre de bénéficiaires',
+      type: 'number',
+    }),
+    defineField({
+      name: 'nombre_annees_experience',
+      title: 'Nombre d\'années d\'expérience',
+      type: 'number',
+    }),
+    defineField({
+      name: 'nombre_partenaires',
+      title: 'Nombre de partenaires',
+      type: 'number',
+    }),
+    defineField({
       name: 'seo',
       title: 'Référencement (SEO)',
       type: 'object',

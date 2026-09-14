@@ -53,7 +53,7 @@ const cardVariants: Variants = {
   },
 };
 
-export default function ImpactStats() {
+export default function ImpactStats({ data }: { data: any }) {
   const { language } = useLanguage();
 
   const stats = [
@@ -62,7 +62,7 @@ export default function ImpactStats() {
         fr: "Projets réalisés",
         en: "Completed Projects",
       },
-      numericValue: 150,
+      numericValue: data.nombre_projets,
       suffix: "+",
       icon: CheckCircle2,
     },
@@ -71,8 +71,8 @@ export default function ImpactStats() {
         fr: "Bénéficiaires & Clients",
         en: "Beneficiaries & Clients",
       },
-      numericValue: 12,
-      suffix: "k",
+      numericValue: data.nombre_beneficiaires,
+      suffix: "",
       icon: Users,
     },
     {
@@ -80,7 +80,7 @@ export default function ImpactStats() {
         fr: "Années d'expérience",
         en: "Years of Experience",
       },
-      numericValue: 25,
+      numericValue: data.nombre_annees_experience,
       suffix: "",
       icon: Calendar,
     },
@@ -89,7 +89,7 @@ export default function ImpactStats() {
         fr: "Partenaires mondiaux",
         en: "Global Partners",
       },
-      numericValue: 40,
+      numericValue: data.nombre_partenaires,
       suffix: "+",
       icon: Trophy,
     },
