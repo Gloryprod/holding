@@ -194,7 +194,7 @@ export default function SocialHome({ data }: { data: any }) {
         <Services data={data} />
 
         {/* 3. LES CHIFFRES */}
-        <ImpactStats />
+        <ImpactStats data={data} />
 
         {/* 4. NOS AXES D'INTERVENTION */}
         <section className="py-24 bg-muted/30 backdrop-blur-sm relative">

@@ -246,7 +246,7 @@ export default function CooperativeHome({ data }: { data: any }) {
         <Services data={data}/>
 
         {/* 4. LES CHIFFRES */}
-        <ImpactStats />
+        <ImpactStats data={data} />
 
         {/* 5. APPEL À REJOINDRE */}
         <section className="py-24">
