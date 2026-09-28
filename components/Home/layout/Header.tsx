@@ -206,6 +206,10 @@ export default function Header({ data }: { data: Entreprise }) {
       href: `/about` 
     },
     { 
+      label: language === 'fr' ? 'Equipe' : 'Team', 
+      href: `/team` 
+    },
+    { 
       label: language === 'fr' ? 'Pourquoi investir ?' : 'Why Invest?', 
       href: `/partners` 
     },

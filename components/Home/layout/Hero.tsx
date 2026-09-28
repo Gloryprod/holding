@@ -50,6 +50,36 @@ export default function Hero({ data }: { data: Entreprise }) {
     '/hero5.jpg',
   ];
 
+  // Structure associant chaque image à ses slogans (FR/EN)
+  const slidesData = [
+    {
+      img: images[0],
+      sloganFr: "Innover pour impacter.",
+      sloganEn: "Innovating for impact.",
+    },
+    {
+      img: images[1],
+      sloganFr: "Des solutions pour demain.",
+      sloganEn: "Solutions for tomorrow.",
+    },
+    {
+      img: images[2],
+      sloganFr: "Innovation, Conseil, Impact.",
+      sloganEn: "Innovation, Consulting, Impact.",
+    },
+    {
+      img: images[3],
+      sloganFr: "Transformer les idées en résultats.",
+      sloganEn: "Turning ideas into results.",
+    },
+    {
+      img: images[4],
+      sloganFr: "Bâtir l'avenir avec l'innovation.",
+      sloganEn: "Building the future through innovation.",
+    },
+  ];
+
+
   // --- DESIGN 1 : BUSINESS ---
   if (type === 'business') {
     switch (nom) {
@@ -185,106 +215,93 @@ export default function Hero({ data }: { data: Entreprise }) {
 
       case 'KODANU':
         return (
-          <section className="relative min-h-screen flex flex-col justify-center items-center text-center font-inter pt-28 pb-16 px-6 overflow-hidden bg-background">
-            <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-              <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-175 h-100 bg-linear-to-tr from-brand/20 via-emerald-500/15 to-amber-500/10 rounded-full blur-[140px] animate-pulse duration-6000" />
-              <div className="absolute bottom-[20%] right-[-5%] w-100 h-100 bg-brand/10 rounded-full blur-[120px] animate-pulse duration-8000" />
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[36px_36px] mask-[radial-gradient(ellipse_75%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
+        <section className="relative min-h-screen flex flex-col justify-center items-center text-center font-inter pt-28 pb-16 px-6 overflow-hidden bg-background">
+          <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+            <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-175 h-100 bg-linear-to-tr from-brand/20 via-emerald-500/15 to-amber-500/10 rounded-full blur-[140px] animate-pulse duration-6000" />
+            <div className="absolute bottom-[20%] right-[-5%] w-100 h-100 bg-brand/10 rounded-full blur-[120px] animate-pulse duration-8000" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[36px_36px] mask-[radial-gradient(ellipse_75%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
+          </div>
+
+          <div className="max-w-4xl mx-auto z-10 flex flex-col items-center animate-in fade-in slide-in-from-bottom-6 duration-700 ease-out">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl font-black font-geist tracking-tight leading-[1.05] mb-6">
+              KODANU <br />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-brand via-emerald-400 to-amber-400 animate-gradient-x">
+                {language === 'fr' ? 'Construire utile, construire vrai.' : 'Build useful, build true'}
+              </span>
+            </h1>
+
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl font-light mb-10 leading-relaxed">
+              {language === 'fr'
+                ? 'Entreprise africaine combinant conseil stratégique, ingénierie technologique et solutions d\'avenir pour répondre aux défis de demain.'
+                : 'African enterprise combining strategic consulting, technological engineering, and future solutions to tackle tomorrow\'s challenges.'}
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full sm:w-auto">
+              <Link href="/about" className="w-full sm:w-auto">
+                <button className="group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-2xl font-bold font-geist text-xs uppercase tracking-wider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-5px_rgba(var(--brand-rgb,74,222,128),0.4)] active:translate-y-0 cursor-pointer">
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    {language === 'fr' ? 'Explorer nos pôles' : 'Explore Our Divisions'}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                </button>
+              </Link>
+
+              <Link href="/contact" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto px-8 py-4 bg-muted/60 hover:bg-muted text-foreground border border-border/80 hover:border-brand/40 rounded-2xl font-bold font-geist text-xs uppercase tracking-wider transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm cursor-pointer">
+                  {language === 'fr' ? 'Nous contacter' : 'Contact Us'}
+                </button>
+              </Link>
             </div>
+          </div>
 
-            <div className="max-w-4xl mx-auto z-10 flex flex-col items-center animate-in fade-in slide-in-from-bottom-6 duration-700 ease-out">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/25 text-brand text-xs font-semibold mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(var(--brand-rgb,74,222,128),0.15)] transition-all hover:scale-105">
-                <Sparkles className="w-3.5 h-3.5 animate-spin-slow text-amber-400" />
-                <span className="uppercase tracking-widest text-[10px] font-bold font-geist">
-                  {language === 'fr' ? 'Construire utile, construire vrai' : 'Build useful, build true'}
-                </span>
-              </div>
+          <div className="w-full max-w-6xl z-10 group relative animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200 ease-out">
+            <div className="absolute -inset-1 bg-linear-to-r from-brand/40 via-emerald-500/30 to-amber-500/30 rounded-[32px] blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
+            <div className="relative w-full h-80 sm:h-120 rounded-3xl overflow-hidden border border-white/10 dark:border-white/15 bg-card/50 backdrop-blur-md shadow-2xl">
+              
+              <Swiper
+                modules={[Autoplay, EffectFade, Pagination]}
+                effect="fade"
+                speed={1500}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                pagination={{ clickable: true }}
+                className="w-full h-full hero-swiper"
+              >
+                {slidesData.map((slide, index) => (
+                  <SwiperSlide key={index} className="relative w-full h-full">
+                    {/* Image de fond */}
+                    <Image
+                      src={slide.img}
+                      fill
+                      sizes="(max-width: 1200px) 100vw, 1100px"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      alt={`${nom || "KODANU"} slide ${index + 1}`}
+                      priority={index === 0}
+                    />
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl font-black font-geist tracking-tight leading-[1.05] mb-6">
-                KODANU <br />
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-brand via-emerald-400 to-amber-400 animate-gradient-x">
-                  {language === 'fr' ? 'Innover pour impacter.' : 'Innovating for impact.'}
-                </span>
-              </h1>
+                    {/* Voile sombre pour accentuer le contraste */}
+                    <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
 
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl font-light mb-10 leading-relaxed">
-                {language === 'fr'
-                  ? 'Entreprise africaine combinant conseil stratégique, ingénierie technologique et solutions d\'avenir pour répondre aux défis de demain.'
-                  : 'African enterprise combining strategic consulting, technological engineering, and future solutions to tackle tomorrow\'s challenges.'}
-              </p>
+                    {/* Bloc Slogan : Centré rigoureusement au milieu de l'image */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[90%] max-w-xl sm:p-8">
+                      {/* <span className="inline-block px-3 py-1 mb-3 rounded-full bg-brand/10 border border-brand/30 text-brand text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+                        {language === 'fr' ? 'Notre Vision' : 'Our Vision'}
+                      </span> */}
+                      
+                      <p className="text-xl sm:text-3xl font-black font-geist text-white leading-snug tracking-tight">
+                        {language === 'fr' ? slide.sloganFr : slide.sloganEn}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full sm:w-auto">
-                <Link href="/about" className="w-full sm:w-auto">
-                  <button className="group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-2xl font-bold font-geist text-xs uppercase tracking-wider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-5px_rgba(var(--brand-rgb,74,222,128),0.4)] active:translate-y-0 cursor-pointer">
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      {language === 'fr' ? 'Explorer nos pôles' : 'Explore Our Divisions'}
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                    <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                  </button>
-                </Link>
-
-                <Link href="/contact" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto px-8 py-4 bg-muted/60 hover:bg-muted text-foreground border border-border/80 hover:border-brand/40 rounded-2xl font-bold font-geist text-xs uppercase tracking-wider transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm cursor-pointer">
-                    {language === 'fr' ? 'Nous contacter' : 'Contact Us'}
-                  </button>
-                </Link>
-              </div>
             </div>
+          </div>
 
-            <div className="w-full max-w-6xl z-10 group relative animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200 ease-out">
-              <div className="absolute -inset-1 bg-linear-to-r from-brand/40 via-emerald-500/30 to-amber-500/30 rounded-[32px] blur-xl opacity-50 group-hover:opacity-100 transition duration-700" />
-              <div className="relative w-full h-80 sm:h-120 rounded-3xl overflow-hidden border border-white/10 dark:border-white/15 bg-card/50 backdrop-blur-md shadow-2xl">
-                {images.length > 0 ? (
-                  <Swiper
-                    modules={[Autoplay, EffectFade, Pagination]}
-                    effect="fade"
-                    speed={1500}
-                    autoplay={{ delay: 2000, disableOnInteraction: false }}
-                    pagination={{ clickable: true }}
-                    className="w-full h-full hero-swiper"
-                  >
-                    {images.map((img: string, index: number) => (
-                      <SwiperSlide key={index} className="relative w-full h-full">
-                        <Image
-                          src={img}
-                          fill
-                          sizes="(max-width: 1200px) 100vw, 1100px"
-                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                          alt={`${nom || "KODANU"} slide ${index + 1}`}
-                          priority={index === 0}
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                ) : (
-                  <Image
-                    src="/placeholder.jpg"
-                    fill
-                    className="object-cover"
-                    alt="Placeholder"
-                  />
-                )}
-
-                <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent opacity-90 z-10 pointer-events-none" />
-
-                <div className="absolute bottom-6 left-6 right-6 sm:right-auto p-4 rounded-2xl bg-background/80 dark:bg-slate-950/80 backdrop-blur-md border border-border flex items-center gap-4 max-w-md shadow-lg z-20 pointer-events-none">
-                  <div className="w-3 h-3 rounded-full bg-brand animate-ping shrink-0" />
-                  <div className="text-left">
-                    <p className="text-[10px] text-brand uppercase font-bold tracking-wider">
-                      {language === 'fr' ? 'Slogan' : 'Tagline'}
-                    </p>
-                    <p className="text-xs font-semibold text-foreground mt-0.5">
-                      {tagline}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-linear-to-t from-background to-transparent z-10 pointer-events-none" />
-          </section>
-        );
+          <div className="absolute bottom-0 left-0 w-full h-24 bg-linear-to-t from-background to-transparent z-10 pointer-events-none" />
+        </section>
+      );
     }
   }
 

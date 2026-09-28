@@ -18,6 +18,7 @@ interface Entreprise {
   slug?: { current: string } | string;
   image: string;
   mission: LocalizedString;
+  vision: LocalizedString;
   adresse?: LocalizedString;
   telephone?: string;
   email?: string;
@@ -73,6 +74,7 @@ export default function Entities({ data }: { data: Entreprise }) {
   const nom = getLocale(data?.nom, language);
   const description = getLocale(data?.description, language);
   const mission = getLocale(data?.mission, language);
+  const vision = getLocale(data?.vision, language);
 
   return (
     <section id="features" className="py-20 bg-background overflow-hidden relative">
@@ -178,16 +180,33 @@ export default function Entities({ data }: { data: Entreprise }) {
               variants={fadeInUp}
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="relative p-6 rounded-2xl bg-muted/40 border-l-4 border-brand backdrop-blur-sm hover:bg-muted/70 transition-colors duration-300 shadow-sm"
+              className="relative p-6 rounded-2xl bg-muted/40 border-t-4 border-brand backdrop-blur-sm hover:bg-muted/70 transition-colors duration-300 shadow-sm"
             >
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-brand animate-ping" />
                 <h2 className="text-xl font-bold text-brand font-geist tracking-wide">
-                  {language === 'fr' ? 'Mission & Vision' : 'Mission & Vision'}
+                  {language === 'fr' ? 'Mission' : 'Mission'}
                 </h2>
               </div>
               <p className="text-muted-foreground/90 leading-relaxed text-sm md:text-base">
                 {mission}
+              </p>
+            </motion.div>
+
+             <motion.div 
+              variants={fadeInUp}
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="relative p-6 rounded-2xl bg-muted/40 border-b-4 border-brand backdrop-blur-sm hover:bg-muted/70 transition-colors duration-300 shadow-sm mt-4"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full bg-brand animate-ping" />
+                <h2 className="text-xl font-bold text-brand font-geist tracking-wide">
+                  {language === 'fr' ? 'Vision' : 'Vision'}
+                </h2>
+              </div>
+              <p className="text-muted-foreground/90 leading-relaxed text-sm md:text-base">
+                {vision}
               </p>
             </motion.div>
 

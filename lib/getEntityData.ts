@@ -11,6 +11,7 @@ export async function getEntityData(subdomain: string) {
     services,
     logo,
     mission,
+    vision,
     facebook,
     linkedin,
     siteWeb,

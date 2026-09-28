@@ -2,7 +2,7 @@
 
 import { Mail } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { client } from "@/sanity/lib/client";
 import { Variants } from "framer-motion";
@@ -87,6 +87,8 @@ export default function Team() {
   const { language } = useLanguage();
   const [teamMembers, setTeamMembers] = useState<Member[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
 
   useEffect(() => {
     async function fetchTeam() {
@@ -111,6 +113,36 @@ export default function Team() {
     fetchTeam();
   }, []);
 
+  // Filtrage et tri dynamique (CEO & Co-founder en premier)
+      const filteredMembers = useMemo(() => {
+      // 1. Filtrage selon la recherche
+      const list = teamMembers.filter((member) => {
+          const roleText = getLocale(member.role, language).toLowerCase();
+          const descText = getLocale(member.description, language).toLowerCase();
+          const nameText = member.name.toLowerCase();
+          const query = searchQuery.toLowerCase().trim();
+  
+          return (
+          nameText.includes(query) ||
+          roleText.includes(query) ||
+          descText.includes(query)
+          );
+      });
+  
+      // 2. Tri personnalisé : mettre le Co-founder / CEO tout en haut
+      return list.sort((a, b) => {
+          const roleA = getLocale(a.role, language).toLowerCase();
+          const roleB = getLocale(b.role, language).toLowerCase();
+  
+          const isCeoA = roleA.includes("ceo") ;
+          const isCeoB = roleB.includes("ceo");
+  
+          if (isCeoA && !isCeoB) return -1; // 'a' passe avant 'b'
+          if (!isCeoA && isCeoB) return 1;  // 'b' passe avant 'a'
+          return 0;                         // conserve l'ordre pour les autres
+      });
+      }, [teamMembers, searchQuery, language]);
+
   return (
     <section id="team" className="py-20 bg-background relative overflow-hidden">
       {/* Halo décoratif d'arrière-plan */}
@@ -126,11 +158,8 @@ export default function Team() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-xs font-bold text-brand uppercase tracking-[0.2em] mb-3 inline-block px-3 py-1 bg-brand/10 rounded-full">
-            {language === 'fr' ? 'Gouvernance' : 'Governance'}
-          </span>
           <h3 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-6">
-            {language === 'fr' ? 'Notre Équipe' : 'Our Team'}
+            {language === 'fr' ? "L'Équipe" : 'The Team'}
           </h3>
           <p className="max-w-2xl mx-auto text-muted-foreground text-base md:text-lg leading-relaxed">
             {language === 'fr'
@@ -157,9 +186,9 @@ export default function Team() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10"
           >
-            {teamMembers.map((member: Member, index: number) => {
+            {filteredMembers.map((member: Member, index: number) => {
               const roleTranslated = getLocale(member.role, language);
               const descriptionTranslated = getLocale(member.description, language);
 

@@ -39,7 +39,8 @@ export const membreType = defineType({
     defineField({
       name: 'mail',
       title: 'Adresse Email',
-      type: 'url',
+      type: 'string',
+      validation: (Rule) => Rule.email(),
     }),
   ],
 })

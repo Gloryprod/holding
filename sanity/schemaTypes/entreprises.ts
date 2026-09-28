@@ -198,7 +198,13 @@ export const entrepriseType = defineType({
     }),
     defineField({
       name: 'mission',
-      title: 'Mission & Vision (Résumé)',
+      title: 'Mission',
+      type: 'localeText',
+      description: 'Une version courte pour les survols ou les résumés.',
+    }),
+     defineField({
+      name: 'vision',
+      title: 'Vision',
       type: 'localeText',
       description: 'Une version courte pour les survols ou les résumés.',
     }),

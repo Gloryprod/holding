@@ -86,7 +86,7 @@ export default function ImpactStats({ data }: { data: any }) {
     },
     {
       label: {
-        fr: "Partenaires mondiaux",
+        fr: "Partenaires",
         en: "Global Partners",
       },
       numericValue: data.nombre_partenaires ? data.nombre_partenaires : 0,

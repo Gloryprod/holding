@@ -165,9 +165,7 @@ export function ContactForm({ data }: ContactFormProps) {
   };
 
   const getTitle = () => {
-    if (type === 'social') return isFr ? "Soutenir notre action" : "Support Our Action";
-    if (type === 'cooperative') return isFr ? "Écrivez à la coopérative" : "Contact the Cooperative";
-    return isFr ? "Contactez nos experts" : "Contact Our Experts";
+    return isFr ? "Laissez-nous un message" : "Leave us a message";
   };
 
   const getSubjectPlaceholder = () => {

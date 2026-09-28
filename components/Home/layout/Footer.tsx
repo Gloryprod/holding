@@ -172,7 +172,7 @@ export default function Footer({ data }: { data: Entreprise }) {
           {/* Colonne 2 : Liens Rapides */}
           <div>
             <h4 className="font-bold mb-6">
-              {language === 'fr' ? 'Navigation' : 'Navigation'}
+              {language === 'fr' ? 'Liens Rapides' : 'Quick Links'}
             </h4>
             <ul className="space-y-4 text-sm text-muted-foreground">
               <li>
@@ -186,10 +186,20 @@ export default function Footer({ data }: { data: Entreprise }) {
                 </Link>
               </li>
               <li>
+                <Link href="#" className="hover:text-brand transition-colors">
+                  {language === 'fr' ? 'Équipe' : 'Team'}
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="hover:text-brand transition-colors">
                   {language === 'fr' ? 'Contact' : 'Contact'}
                 </Link>
               </li>
+              <li>
+                <Link href="/partners" className="hover:text-brand transition-colors">
+                  {language === 'fr' ? 'Pourquoi investir ?' : 'Why Invest?'}
+                </Link>
+              </li>  
             </ul>
           </div>
 
@@ -202,7 +212,6 @@ export default function Footer({ data }: { data: Entreprise }) {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-brand shrink-0 mt-0.5" />
                 <span>
-                  {language === 'fr' ? 'Siège Social : ' : 'Headquarters: '}
                   {adresse || (language === 'fr' ? 'Adresse non renseignée' : 'Address not specified')}
                 </span>
               </li>
