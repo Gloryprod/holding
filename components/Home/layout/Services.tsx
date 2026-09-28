@@ -303,7 +303,7 @@ interface Entreprise {
 const KODANU_SERVICES = [
   {
     icon: "TrendingUp",
-    image: "/images/services/consulting.jpg", // Remplacez par vos chemins d'images
+    image: "/pole1.jpg",
     titre: {
       fr: "Conseil Stratégique & Transactionnel",
       en: "Strategic & Transactional Consulting",
@@ -327,7 +327,7 @@ const KODANU_SERVICES = [
   },
   {
     icon: "Cpu",
-    image: "/images/services/rd-innovation.jpg",
+    image: "/pole2.jpg",
     titre: {
       fr: "Recherche, Développement & Innovation",
       en: "R&D & Innovation",
@@ -351,7 +351,7 @@ const KODANU_SERVICES = [
   },
   {
     icon: "Code2",
-    image: "/images/services/digital-tech.jpg",
+    image: "/pole3.jpg",
     titre: {
       fr: "Solutions Numériques & Ingénierie Technologique",
       en: "Digital Solutions & Tech Engineering",

@@ -99,12 +99,12 @@ export default function Entities({ data }: { data: Entreprise }) {
           >
             
             {/* Conteneur du collage */}
-            <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] group">
+            <div className="relative hidden lg:flex w-full max-w-90 sm:max-w-[320px] aspect-4/5 group">
               
               {/* 1. Image principale */}
               <div className="w-full h-full rounded-2xl overflow-hidden shadow-xl border border-border/50 relative">
                 <Image
-                  src={data.image} 
+                  src="/industrial-designers.jpg" 
                   alt={nom || "Image d'entreprise"}
                   fill
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -129,7 +129,7 @@ export default function Entities({ data }: { data: Entreprise }) {
               >
                 <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl border-4 border-background relative">
                   <Image
-                    src="/hero5.jpg" 
+                    src="/military.jpg" 
                     alt={nom || "Image d'illustration"}
                     fill
                     className="object-cover"
@@ -180,7 +180,7 @@ export default function Entities({ data }: { data: Entreprise }) {
               variants={fadeInUp}
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="relative p-6 rounded-2xl bg-muted/40 border-t-4 border-brand backdrop-blur-sm hover:bg-muted/70 transition-colors duration-300 shadow-sm"
+              className="relative p-6 rounded-2xl bg-muted/40 border-l-4 border-brand backdrop-blur-sm hover:bg-muted/70 transition-colors duration-300 shadow-sm"
             >
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-brand animate-ping" />
@@ -197,7 +197,7 @@ export default function Entities({ data }: { data: Entreprise }) {
               variants={fadeInUp}
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="relative p-6 rounded-2xl bg-muted/40 border-b-4 border-brand backdrop-blur-sm hover:bg-muted/70 transition-colors duration-300 shadow-sm mt-4"
+              className="relative p-6 rounded-2xl bg-muted/40 border-r-4 border-brand backdrop-blur-sm hover:bg-muted/70 transition-colors duration-300 shadow-sm mt-4"
             >
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-brand animate-ping" />

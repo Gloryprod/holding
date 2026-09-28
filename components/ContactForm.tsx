@@ -1,10 +1,12 @@
 "use client";
 
 import { Send, Building2, User, Leaf, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import toast from "react-hot-toast";
+import ReCAPTCHA from "react-google-recaptcha";
 import { sendContactEmail } from "../app/actions/send-email";
 import { useLanguage } from "@/context/LanguageContext";
+import { getLocale } from "@/lib/getLocal"; // Fonction utilitaire pour obtenir la traduction appropriée
 import { motion } from "framer-motion";
 
 interface ContactFormProps {
@@ -20,6 +22,8 @@ export function ContactForm({ data }: ContactFormProps) {
   const isFr = language === 'fr';
 
   const type = data?.typeEntite || 'business';
+  const nom = getLocale(data.nom, language);
+  
 
   const initialFormState = {
     name: "",
@@ -32,26 +36,47 @@ export function ContactForm({ data }: ContactFormProps) {
   const [formData, setFormData] = useState(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // État et référence pour le reCAPTCHA
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      toast.error(
+        isFr
+          ? "Veuillez cocher la case 'Je ne suis pas un robot'."
+          : "Please check the 'I am not a robot' box."
+      );
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      const result = await sendContactEmail(formData, data.nom, data.email);
+      const result = await sendContactEmail(formData, data.nom, data.email, captchaToken);
 
       if (result.success) {
         toast.success(
           isFr 
-            ? `Votre message a été envoyé avec succès à l'équipe de ${data.nom} !`
-            : `Your message was successfully sent to the team at ${data.nom}!`
+            ? `Votre message a été envoyé avec succès à l'équipe de ${nom} !`
+            : `Your message was successfully sent to the team at ${nom}!`
         );
         setFormData(initialFormState);
+        // Réinitialiser le captcha
+        recaptchaRef.current?.reset();
+        setCaptchaToken(null);
       } else {
         toast.error(
-          isFr
-            ? `Erreur lors de l'envoi, veuillez réessayer ultérieurement.`
-            : `Error sending message, please try again later.`
+          result.error || (
+            isFr
+              ? `Erreur lors de l'envoi, veuillez réessayer ultérieurement.`
+              : `Error sending message, please try again later.`
+          )
         );
+        recaptchaRef.current?.reset();
+        setCaptchaToken(null);
       }
     } catch (error: any) {
       if (
@@ -255,12 +280,22 @@ export function ContactForm({ data }: ContactFormProps) {
           ></textarea>
         </div>
 
+        {/* Widget Google reCAPTCHA */}
+        <div className="flex justify-center my-4 overflow-x-auto">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            onChange={(token: string | null) => setCaptchaToken(token)}
+            hl={isFr ? "fr" : "en"}
+          />
+        </div>
+
         {/* Submit Button Animé */}
         <motion.button 
           type="submit" 
-          disabled={isSubmitting}
-          whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-          whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+          disabled={isSubmitting || !captchaToken}
+          whileHover={{ scale: isSubmitting || !captchaToken ? 1 : 1.02 }}
+          whileTap={{ scale: isSubmitting || !captchaToken ? 1 : 0.98 }}
           className="cursor-pointer w-full flex items-center justify-center gap-3 bg-brand text-brand-foreground py-4 rounded-2xl font-bold hover:opacity-90 disabled:opacity-50 transition-all shadow-lg shadow-brand/20 group"
         >
           {isSubmitting ? (

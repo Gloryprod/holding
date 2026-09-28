@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 // Context d'Internationalisation et utilitaires
 import { useLanguage } from "@/context/LanguageContext";
 import { getLocale } from "@/lib/getLocal";
+import { LegalDocType } from "@/lib/legalDocsData";
 
 type LocalizedString = string | { fr?: string; en?: string };
 
@@ -61,6 +62,12 @@ export default function Footer({ data }: { data: Entreprise }) {
   const nom = getLocale(data?.nom, language);
   const tagline = getLocale(data?.tagline, language);
   const adresse = getLocale(data?.adresse, language);
+
+  // Récupération du slug de l'entreprise pour la route des liens légaux
+  const companySlug =
+    typeof data?.slug === "object"
+      ? data?.slug?.current
+      : data?.slug || nom?.toLowerCase() || "kodanu";
 
   // 2. Recherche des partenaires associés à l'entreprise actuelle
   const entrepriseInfo = PARTENAIRES_PAR_ENTREPRISE.find(
@@ -122,8 +129,8 @@ export default function Footer({ data }: { data: Entreprise }) {
 
         <hr className="border-border mb-20" />
 
-        {/* 2. Grille Principale du Footer */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        {/* 2. Grille Principale du Footer (4 Colonnes) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           
           {/* Colonne 1 : À propos */}
           <div className="space-y-6">
@@ -174,7 +181,7 @@ export default function Footer({ data }: { data: Entreprise }) {
             <h4 className="font-bold mb-6">
               {language === 'fr' ? 'Liens Rapides' : 'Quick Links'}
             </h4>
-            <ul className="space-y-4 text-sm text-muted-foreground">
+            <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-brand transition-colors">
                   {language === 'fr' ? 'Accueil' : 'Home'}
@@ -186,7 +193,7 @@ export default function Footer({ data }: { data: Entreprise }) {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-brand transition-colors">
+                <Link href="/team" className="hover:text-brand transition-colors">
                   {language === 'fr' ? 'Équipe' : 'Team'}
                 </Link>
               </li>
@@ -203,7 +210,46 @@ export default function Footer({ data }: { data: Entreprise }) {
             </ul>
           </div>
 
-          {/* Colonne 3 : Contact Direct */}
+          {/* Colonne 3 : Informatives & Juridique */}
+          <div>
+            <h4 className="font-bold mb-6">
+              {language === 'fr' ? 'Informations Légales' : 'Legal & Info'}
+            </h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li>
+                <Link href={`/legalDoc/${"mentions-legales" as LegalDocType}`} className="hover:text-brand transition-colors">
+                  {language === 'fr' ? 'Mentions Légales' : 'Legal Notice'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/legalDoc/${"politique-confidentialite" as LegalDocType}`} className="hover:text-brand transition-colors">
+                  {language === 'fr' ? 'Politique de Confidentialité' : 'Privacy Policy'}
+                </Link>
+              </li>
+              {/* <li>
+                <Link href={`/legalDoc/${"politique-cookies"}`} className="hover:text-brand transition-colors">
+                  {language === 'fr' ? 'Politique Cookies' : 'Cookie Policy'}
+                </Link>
+              </li> */}
+              <li>
+                <Link href={`/legalDoc/${"cgu"}`} className="hover:text-brand transition-colors">
+                  {language === 'fr' ? "Conditions Générales (CGU)" : "Terms of Service"}
+                </Link>
+              </li>
+              {/* <li>
+                <Link href={`/legalDoc/${"propriete-intellectuelle"}`} className="hover:text-brand transition-colors">
+                  {language === 'fr' ? 'Propriété Intellectuelle' : 'Intellectual Property'}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/legalDoc/${"contact"}`} className="hover:text-brand transition-colors">
+                  {language === 'fr' ? 'Contact & Réclamations' : 'Contact & Claims'}
+                </Link>
+              </li> */}
+            </ul>
+          </div>
+
+          {/* Colonne 4 : Contact Direct */}
           <div>
             <h4 className="font-bold mb-6">
               {language === 'fr' ? 'Nous Contacter' : 'Contact Us'}
@@ -228,17 +274,9 @@ export default function Footer({ data }: { data: Entreprise }) {
 
         </div>
 
-        {/* 3. Copyright et Légal */}
-        <div className="border-t border-border pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-muted-foreground font-medium uppercase tracking-widest">
-          <p>© {currentYear} {nom || "Obed Group"}. {language === 'fr' ? 'Tous droits réservés.' : 'All rights reserved.'}</p>
-          <div className="flex gap-8">
-            <Link href="#" className="hover:text-brand">
-              {language === 'fr' ? 'Mentions Légales' : 'Legal Notice'}
-            </Link>
-            <Link href="#" className="hover:text-brand">
-              {language === 'fr' ? 'Politique de Confidentialité' : 'Privacy Policy'}
-            </Link>
-          </div>
+        {/* 3. Copyright et Bas de page */}
+        <div className="border-t border-border pt-10 flex md:flex-row justify-center items-center gap-6 text-xs text-muted-foreground font-medium uppercase tracking-widest">
+          <p>© {currentYear} {nom || "Horyzion"}. {language === 'fr' ? 'Tous droits réservés.' : 'All rights reserved.'}</p>
         </div>
 
       </div>

@@ -240,7 +240,7 @@ export default function Hero({ data }: { data: Entreprise }) {
               <Link href="/about" className="w-full sm:w-auto">
                 <button className="group relative w-full sm:w-auto px-8 py-4 bg-brand text-brand-foreground rounded-2xl font-bold font-geist text-xs uppercase tracking-wider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-5px_rgba(var(--brand-rgb,74,222,128),0.4)] active:translate-y-0 cursor-pointer">
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    {language === 'fr' ? 'Explorer nos pôles' : 'Explore Our Divisions'}
+                    {language === 'fr' ? 'Découvrir nos projets' : 'Explore our projects'}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />

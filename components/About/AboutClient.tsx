@@ -17,7 +17,7 @@ function getEntityImages(typeEntite?: string) {
       };
     case 'business':
       return {
-        img1: '/business1.jpg',
+        img1: '/businessman-with-chart.jpg',
         img2: '/business2.jpg',
       };
     case 'cooperative':
