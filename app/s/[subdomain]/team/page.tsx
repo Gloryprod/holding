@@ -336,13 +336,9 @@ export default function TeamPage() {
 
                     {activeModalMember.description ? (
                       <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">
-                        {getLocale(activeModalMember.bio, language)}
-                      </p>
-                    ) : (
-                      <p className="text-muted-foreground text-sm leading-relaxed">
                         {getLocale(activeModalMember.description, language)}
                       </p>
-                    )}
+                    ) : ""}
 
                     <div className="flex items-center gap-3 pt-4 border-t border-border/50">
                       {activeModalMember.mail && (
