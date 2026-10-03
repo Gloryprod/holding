@@ -19,8 +19,10 @@ export async function GET(request: NextRequest) {
   // Tes routes principales à indexer pour cette filiale
   const pages = [
     '',
-    // '/about',
-    // '/contact',
+    '/about',
+    '/contact',
+    '/partners',
+    '/team',
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

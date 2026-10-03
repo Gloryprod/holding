@@ -6,6 +6,8 @@ import Footer from "@/components/Home/layout/Footer";
 import { Metadata } from "next";
 import NotFound from "./not-found";
 import { JsonLd } from '@/components/json-ld';
+import { cookies } from "next/headers";
+import { getLocale } from "@/lib/getLocal";
 
 // import { headers } from "next/headers";
 // import {extractSubdomain} from "@/middleware";
@@ -19,8 +21,17 @@ import { JsonLd } from '@/components/json-ld';
 export async function generateMetadata({ params }: { params: Promise<{ subdomain: string }> }): Promise<Metadata> {
   const { subdomain } = await params;
   
+  // Lecture du cookie synchronisé par le client
+  const cookieStore = await cookies();
+  const language = (cookieStore.get('NEXT_LOCALE')?.value as 'fr' | 'en') || 'fr';
+
   // On récupère les données SEO depuis Sanity avec le sous-domaine exact
   const data = await getSeoData(subdomain);
+
+  // Exemple d'utilisation avec getLocale
+  const nom = getLocale(data?.nom, language) || 'Obed Group';
+  const seo_title = getLocale(data?.seo?.metaTitle, language) || nom;
+  const seo_description = getLocale(data?.seo?.metaDescription, language) || `Bienvenue sur le site officiel de ${nom || 'notre filiale'}.`;
 
   // Fallback propre si l'entité n'existe pas
   if (!data) {
@@ -37,11 +48,11 @@ export async function generateMetadata({ params }: { params: Promise<{ subdomain
     ? 'https://horyzion.com' 
     : `https://${subdomain}.horyzion.com`;
 
-  const title = data?.seo?.metaTitle || data?.nom || 'Obed Group';
-  const description = data?.seo?.metaDescription || `Bienvenue sur le site officiel de ${data?.nom || 'notre filiale'}.`;
+  const title = seo_title || nom || 'Obed Group';
+  const description = seo_description || `Bienvenue sur le site officiel de ${nom || 'notre filiale'}.`;
   const ogImage = data?.seo?.ogImageUrl || data?.logoUrl || '/default-share-image.png';
   const favicon = data?.logoUrl || '/favicon.ico';
-  const keywords = data?.seo?.keywords || [data?.nom, 'horyzion', 'cooperative', 'bénin', 'ong eden bénin', 'business', 'sarl', 'agritropic', 'bbs-wbb'];
+  const keywords = data?.seo?.keywords || [nom, 'horyzion', 'cooperative', 'bénin', 'ong eden bénin', 'business', 'sarl', 'agritropic', 'bbs-wbb'];
 
   return {
     metadataBase: new URL(domainUrl),
@@ -64,7 +75,7 @@ export async function generateMetadata({ params }: { params: Promise<{ subdomain
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `Aperçu de ${data?.nom || 'notre entité'}`,
+          alt: `Aperçu de ${nom || 'notre entité'}`,
         },
       ],
       type: 'website',
